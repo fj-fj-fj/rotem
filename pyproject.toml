@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "rotem"
+version = "0.1.0"
+description = ""
+authors = [
+    "fj-fj-fj <x1x1xx0@protonmail.com>"
+]
+license = "MIT"
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "^2.0.2"
+
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+black = "^21.10b0"
+mypy = "^0.910"
+pytest = "^6.2.5"
+coverage = "^6.1.2"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+py_version = 36
+profile = "black"
+force_single_line = true
+combine_as_imports = true
+lines_between_types = 1
+lines_after_imports = 2
+src_paths = ["src", "tests"]
+extend_skip = ["setup.py"]
+
+
+[tool.black]
+target-version = ['py39']
+force-exclude = '''
+.*/setup\.py$
+'''
+
+
+# https://github.com/python-poetry/poetry/pull/4510
+[tool.mypy]
+python_version = "3.9"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true
+files = "src"
+
+
+[[tool.mypy.overrides]]
+module = [
+]
+ignore_errors = true
+
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:"
+]

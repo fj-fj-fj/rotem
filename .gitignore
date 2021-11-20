@@ -1,0 +1,9 @@
+*
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.python-version
+!Makefile
+!README.md
+!poetry.lock
+!pyproject.toml
