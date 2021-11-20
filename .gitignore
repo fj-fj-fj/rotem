@@ -1,4 +1,7 @@
 *
+# white list
+
+# configs
 !.editorconfig
 !.gitattributes
 !.gitignore
@@ -7,3 +10,21 @@
 !README.md
 !poetry.lock
 !pyproject.toml
+
+# App
+!app.py
+!app/
+!app/__init__.py
+!app/routes.py
+
+# templates
+!app/templates/
+!app/templates/about.html
+!app/templates/help.html
+!app/templates/historical_data.html
+!app/templates/index.html
+!app/templates/results_interpretation.html
+!app/templates/rotem_parameters.html
+!app/templates/rotem_tests.html
+!app/templates/useful_links.html
+!app/templates/video_instructions.html
