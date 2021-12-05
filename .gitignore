@@ -16,6 +16,9 @@
 !app/
 !app/__init__.py
 
+# App: news
+!app/news/
+!app/news/__init__.py
 
 # templates
 !app/templates/
