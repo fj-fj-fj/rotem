@@ -15,7 +15,7 @@
 !app.py
 !app/
 !app/__init__.py
-!app/routes.py
+
 
 # templates
 !app/templates/
@@ -33,3 +33,8 @@
 !app/templates/menu/video_instructions_work.html
 !app/templates/base.html
 !app/templates/index.html
+
+# routes
+!app/views/
+!app/views/menu.py
+!app/views/routes.py
