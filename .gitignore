@@ -15,6 +15,7 @@
 !app.py
 !app/
 !app/__init__.py
+!app/menu.py
 
 # App: news
 !app/news/
