@@ -1,4 +1,5 @@
 {% for m in menu %}
+    <aside>
     {% if m.name == 'video instructions' %}
         <select name="" id="">
         <option disabled selected>Video instructions</option>
@@ -9,4 +10,5 @@
     {% else %}
         <li><a href="{{ url_for(m.url) }}">{{ m.name }}</a></li>
     {% endif %}
+    </aside>
 {% endfor %}

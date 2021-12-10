@@ -21,6 +21,11 @@
 !app/news/
 !app/news/__init__.py
 
+# static
+!app/static
+!app/static/css
+!app/static/css/styles.css
+
 # templates
 !app/templates/
 !app/templates/includes/

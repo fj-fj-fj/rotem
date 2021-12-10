@@ -6,13 +6,14 @@
 
 {% block content %}
 {{ super() }}
-    <div>
-        <div>
-            {% for article in articles %}
-                <p>{{ article.title }}</p>
-                <p>{{ article.description }}</p>
-                <p>{{ article.url }}</p>
-            {% endfor %}
-        </div>
-    </div>
+    <article class="news">
+    {% for article in articles %}
+        <article class="news__item">
+            <h3 class="news__title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+            </h3>
+            <p class="news__lead">{{ article.description }}</p>
+        </article>
+    {% endfor %}
+    </article>
 {% endblock %}
