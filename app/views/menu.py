@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import flash, render_template, request
 
 from app import app
 
@@ -33,8 +33,13 @@ def video_instructions_smth():
     return render_template('menu/video_instructions_smth.html')
 
 
-@app.route('/interpretation-of-results')
+@app.route('/interpretation-of-results', methods=['GET', 'POST'])
 def results_interpretation():
+    if request.method == 'POST':
+        if len(request.form['username']) >= 2:
+            flash('Succsess! :)', category='success')
+        else:
+            flash('Error! :(', category='error')
     return render_template('menu/results_interpretation.html')
 
 

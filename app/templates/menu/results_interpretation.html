@@ -1,1 +1,22 @@
-results interpreter
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Interpretation of results</title>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="menu__page__content">
+    <h3 class="menu__page__title">Interpretation of results</h3>
+
+    {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('results_interpretation') }}" method="post" class="form-contact">
+        <p><input type="text" name="username" placeholder="Enter your name:" value="" required /></p>
+        <p><input type="text" name="data" placeholder="Enter your data:" value="" required /></p>
+        <p><input type="submit" value="Send" /></p>
+    </form>
+</div>
+{% endblock %}
