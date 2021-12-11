@@ -18,9 +18,13 @@
 !app/__init__.py
 !app/menu.py
 
-# App: news
+# API news
 !app/news/
 !app/news/__init__.py
+
+# App settings
+!app/settings/
+!app/settings/base.py
 
 # static
 !app/static
