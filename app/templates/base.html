@@ -17,13 +17,19 @@
     <div>
         en/ru (right)
     </div>
+
     <div class="container">
-        {% block content %}
         <div class="menu">
             {% include 'includes/menu.html' %}
         </div>
-        {% endblock %}
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

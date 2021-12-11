@@ -5,6 +5,7 @@
 !.editorconfig
 !.gitattributes
 !.gitignore
+!.jshintrc
 !.python-version
 !Makefile
 !README.md
@@ -25,6 +26,8 @@
 !app/static
 !app/static/css
 !app/static/css/styles.css
+!app/static/js
+!app/static/js/script.js
 
 # templates
 !app/templates/

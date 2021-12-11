@@ -16,17 +16,12 @@ menu = [
         'url': 'parameters',
     },
     {
-        'name': 'video instructions',
-        'select': [
-            {
-                'name': 'Work',
-                'url': 'video_instructions_work',
-            },
-            {
-                'name': 'smth(?)',
-                'url': 'video_instructions_smth',
-            },
-        ],
+        'name': 'Video instructions: Work',
+        'url': 'video_instructions_work',
+    },
+    {
+        'name': 'Video instructions: Smth',
+        'url': 'video_instructions_smth',
     },
     {
         'name': 'Interpretation of results',
