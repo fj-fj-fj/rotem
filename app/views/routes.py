@@ -1,3 +1,5 @@
+from datetime import date, datetime
+
 from flask import render_template
 
 from app import app
@@ -8,7 +10,8 @@ from app.views.menu import *  # noqa: F401 E402
 
 @app.context_processor
 def show_menu():
-    return {'menu': menu}
+    current_year = datetime.now().year
+    return {'menu': menu, 'current_year': current_year}
 
 
 @app.route('/news')

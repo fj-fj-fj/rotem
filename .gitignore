@@ -36,6 +36,8 @@
 # templates
 !app/templates/
 !app/templates/includes/
+!app/templates/includes/footer.html
+!app/templates/includes/header.html
 !app/templates/includes/menu.html
 !app/templates/menu/
 !app/templates/menu/about.html
