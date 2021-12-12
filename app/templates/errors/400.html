@@ -1,0 +1,16 @@
+{% extends 'errors/base_errors.html' %}
+
+{% block title %}
+<title>Bad Request</title>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="error__page">
+    <h1>400</h3>
+    <br>
+    <p>Invalid request.</p>
+    <br>
+    <p>Go <a href="{{ url_for('index') }}">back home</a>.</p>
+</div>
+{% endblock %}

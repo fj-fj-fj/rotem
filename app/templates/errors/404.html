@@ -1,0 +1,19 @@
+{% extends 'errors/base_errors.html' %}
+
+{% block title %}
+<title>Page not found</title>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="error__page">
+    <h1>404</h3>
+    <br>
+    <p>This is not the web page you are looking for.</p>
+    <br>
+    <p>
+        Try going back to the previous page or go 
+        <a href="{{ url_for('index') }}">back home</a>.
+    </p>
+</div>
+{% endblock %}

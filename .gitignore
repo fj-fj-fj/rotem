@@ -33,12 +33,20 @@
 !app/static/js
 !app/static/js/script.js
 
-# templates
+# Templates
 !app/templates/
+
+!app/templates/errors/
+!app/templates/errors/400.html
+!app/templates/errors/404.html
+!app/templates/errors/500.html
+!app/templates/errors/base_errors.html
+
 !app/templates/includes/
 !app/templates/includes/footer.html
 !app/templates/includes/header.html
 !app/templates/includes/menu.html
+
 !app/templates/menu/
 !app/templates/menu/about.html
 !app/templates/menu/help.html
@@ -49,10 +57,12 @@
 !app/templates/menu/useful_links.html
 !app/templates/menu/video_instructions_smth.html
 !app/templates/menu/video_instructions_work.html
+
 !app/templates/base.html
 !app/templates/index.html
 
-# routes
+# Routes
 !app/views/
+!app/views/errors.py
 !app/views/menu.py
 !app/views/routes.py

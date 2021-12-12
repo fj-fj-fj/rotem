@@ -1,0 +1,16 @@
+{% extends 'errors/base_errors.html' %}
+
+{% block title %}
+<title>Server is not available</title>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="error__page">
+    <h1>500</h3>
+    <br>
+    <p>Server is not available :(</p>
+    <br>
+    <p><a href="{{ url }}">Let me try again!</a></p>
+</div>
+{% endblock %}
