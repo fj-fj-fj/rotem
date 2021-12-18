@@ -3,6 +3,10 @@ PIP := $(VENV)/bin/pip
 PYTHON := $(VENV)/bin/python3
 CMD := poetry run
 
+ENV_FILE := .envrc
+SERVER := $(SERVER)
+SERVER_APP_NAME := $(SERVER_APP_NAME)
+
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 APP := $(ROOT_DIR)/app.py
 
@@ -40,3 +44,20 @@ typos:
 
 check:
 	make styles typos
+
+# https://devcenter.heroku.com/articles/heroku-cli
+# install heroku-cli:
+#   curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+#   heroku --version
+#   heroku login or heroku login -i
+#   heroku git:remote -a $(SERVER_APP_NAME)
+# Poetry build pack for Heroku:
+#   heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git -a $(SERVER_APP_NAME)
+#   heroku buildpacks:clear -a $(SERVER_APP_NAME)
+#   heroku buildpacks:add heroku/python -a $(SERVER_APP_NAME)
+# https://devcenter.heroku.com/articles/config-vars
+# https://github.com/xavdid/heroku-config:
+#   heroku plugins:install heroku-config
+
+remote-env: ## Remote: set config vars.
+	heroku config:push --file $(ENV_FILE) --app $(SERVER_APP_NAME)
