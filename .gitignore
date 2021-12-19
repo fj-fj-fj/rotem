@@ -31,6 +31,9 @@
 !app/static
 !app/static/css
 !app/static/css/styles.css
+!app/static/images/
+!app/static/images/bg-bottom.png
+!app/static/images/bg-top.png
 !app/static/js
 !app/static/js/script.js
 

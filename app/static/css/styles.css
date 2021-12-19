@@ -17,6 +17,17 @@ a {
   margin: 0;
 }
 
+/* Common Wrapper */
+
+.container {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(125deg, #6a89cc, #b8c994);
+}
+
 /* Header */
 
 header {
@@ -25,10 +36,13 @@ header {
   width:100%;
   margin-bottom: 20px;
   padding: 15px;
-  background: aliceblue;
   display: flex;
   z-index: 2;
   justify-content: space-between;
+  background: aliceblue;
+  background-image: url(../images/bg-top.png);
+  background-repeat: repeat-x;
+  background-position: top center;
 }
 
 header div {
@@ -39,8 +53,8 @@ header div {
 }
 
 header ul {
-  list-style: none;
   margin: 0;
+  list-style: none;
   padding-right: 50px;
 }
 
@@ -55,8 +69,8 @@ header a {
 }
 
 header a:hover {
-  color: #ffcf48;
-  text-decoration: none;
+  font-size: 31px;
+  color: #9E147A;
 }
 
 /* Footer */
@@ -66,39 +80,33 @@ footer {
   width:100%;
   margin-top: auto;
   padding: 15px;
-  background: aliceblue;
   text-align: center;
-}
-
-/* Common Wrapper */
-
-.container {
-  position: relative;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-image: linear-gradient(125deg, #6a89cc, #b8c994);
+  background: aliceblue;
+  background-image: url(../images/bg-bottom.png);
+  background-repeat: repeat-x; 
+  background-position: bottom center;
 }
 
 /* Left Menu */
 
 .menu {
   position: fixed;
-  left: 0; top: 80px;
+  left: 0;
+  top: 80px;
   z-index: 99;
   width: 30%;
-  height: 100vh;
+  height: 70vh;
+  border-radius: 0 0 5px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
   transition: 0.5s;
   transform: translateX(-100%);
+  background-image: linear-gradient(125deg, #9E147A, #b8c994), url(../images/rotem_delta.jpg);
 }
 
 .menu__active {
-  transform: translateX(0%);
+  transform: translateX(-10%);
   top: 80px;
 }
 
@@ -108,6 +116,7 @@ footer {
   align-items: center;
   height: 50%;
   flex-direction: column;
+  row-gap: 30px;
 }
 
 .menu__list a {
@@ -119,9 +128,7 @@ footer {
 
 .menu__list a:hover {
   color: #ffcf48;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 /* Menu Item */
@@ -152,12 +159,12 @@ footer {
   position: absolute;
   display: inline-block;
   cursor: pointer;
-  right: -35px;
+  right: -45px;
   top: 20px;
 }
 
 .menu__btn__active {
-  transform: translateX(-35px);
+  transform: translateX(-55px);
 }
 
 /* Animated Menu Icon */
@@ -184,6 +191,10 @@ footer {
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
+.menu__btn__active:hover .bar1, .bar3 {
+  background-color: #f7c43a;
+}
+
 /* Content */
 
 .content {
@@ -208,12 +219,13 @@ footer {
 .news__item {
   width: 60%;
   margin-left: 10%;
-  background-color: paleturquoise;
+  background: aliceblue;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: 10px 10px 10px rgb(102, 101, 101);
 }
 
 .news__title {
@@ -253,13 +265,13 @@ footer {
   background: #ff9c9c; 
 }
 
+/* Error Status Code */
+
 .error__page {
   color: #343434;
   margin-top: 100px;
   text-align: center;
 }
-
-/* Error Status Code */
 
 .error__page h1 {
   font-size: 160px;
