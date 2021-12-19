@@ -292,7 +292,6 @@ footer {
   bottom: 18px;
   right: 30px;
   opacity: 0;
-  /* font-size: 18px; */
   background-color: #b64297;
   color: aliceblue;
   cursor: pointer;
@@ -300,6 +299,8 @@ footer {
   border-radius: 4px;
   text-decoration: none;
 }
+
+/* Scroll To Top Button */
 
 .top.active {
   bottom: 32px;
