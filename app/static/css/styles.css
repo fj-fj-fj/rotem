@@ -106,8 +106,9 @@ footer {
 }
 
 .menu__active {
-  transform: translateX(-10%);
   top: 80px;
+  transform: translateX(-10%);
+  box-shadow: 10px 10px 10px rgb(102, 101, 101);
 }
 
 .menu__list {
@@ -128,22 +129,22 @@ footer {
 
 .menu__list a:hover {
   color: #ffcf48;
-  font-weight: 800;
 }
 
 /* Menu Item */
 
 .menu__page__content {
   width: 60%;
-  height: 60vh;
+  height: auto;
   margin-left: 10%;
   padding-top: 30px;
-  background-color: paleturquoise;
+  background-color: #fff;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: 10px 10px 10px rgb(102, 101, 101);
 }
 
 .menu__page__title {
@@ -193,6 +194,49 @@ footer {
 
 .menu__btn__active:hover .bar1, .bar3 {
   background-color: #f7c43a;
+}
+
+/* Menu About */
+
+.menu__about__description-brand {
+  margin-bottom: 10px;
+}
+
+.menu__about__description-img {
+  margin-bottom: 10px;
+}
+
+.menu__about_description-body {
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__about__spec-title {
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.menu__page__content table {
+  margin: 15px;
+  border-collapse: collapse;
+  background:  #fcfbfc;
+  text-align: left;
+}
+
+.menu__page__content table tr td {
+  border: 1px solid #9E147A;
+}
+
+.menu__page__content table tr, table td {
+  padding: 20px;
+}
+
+.menu__page__content table td:first-child {
+  text-align: center;
+  background: #faf5f8;
 }
 
 /* Content */

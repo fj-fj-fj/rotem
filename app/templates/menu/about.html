@@ -1,1 +1,74 @@
-Rotem info
+{% extends 'menu/base.html' %}
+
+{% block title %}
+<title>About</title>
+{% endblock %}
+
+{% block content %}
+    <div class="menu__page__content">
+        <div class="menu__page__title">
+            <h1>Тромбоэластометр ROTEM delta</h1>
+        </div>
+        <div class="menu__about__description-brand">
+            <img src="{{ url_for('static', filename='images/werfen.png') }}" alt>
+        </div>
+        <div class="menu__about__description-img">
+            <img src="{{ url_for('static', filename='images/rotem_delta.jpg') }}" alt="">
+        </div>
+        <div class="menu__about__description-body">
+            <p>
+                Принцип технологии ROTEM – измерение вискоэластичных свойств формирующегося 
+                сгустка путем ротационной тромбоэластометрии.
+            </p>
+            <p>
+                Тромбоэластометрия позволяет качественно и количественно оценить вязкость, 
+                прочность и эластичность сгустка цельной крови, скорость его образования и последующего лизиса.
+            </p>
+
+            <p class="menu__about__spec-title">Технические характеристики</p>
+            <table class="menu__about__spec-table">
+                <tr>
+                    <td>Тип анализатора</td>
+                    <td>Настольный, автоматический анализатор гемостаза тромбоэластометр четырехканальный</td>
+                </tr>
+                <tr>
+                    <td>Принципы измерения</td>
+                    <td>Ротационная тромбоэластометрия</td>
+                </tr>
+                <tr>
+                    <td>Количество независимых измерительных каналов в одном приборе</td>
+                    <td>4 шт</td>
+                </tr>
+                <tr>
+                    <td>Объем образца</td>
+                    <td>300 мкл</td>
+                </tr>
+                <tr>
+                    <td>Проба</td>
+                    <td>Цитратная кровь, цельная кровь</td>
+                </tr>
+                <tr>
+                    <td>Основные измеряемые параметры</td>
+                    <td>Активация коагуляции и полимеризация сгустка</td>
+                </tr>
+                <tr>
+                    <td>Ввод образца</td>
+                    <td>Автоматическая пипетка</td>
+                </tr>
+                <tr>
+                    <td>Типы тестов  и алгоритм</td>
+                    <td>
+                        <ol>
+                            <li>EXTEM (активация внешнего пути свертывания крови) </li>
+                            <li>INTEM (активация внутреннего пути свертывания крови)</li>
+                            <li>HEPTEM (тест с гепариназой)</li>
+                            <li>FIBTEM (тест на функциональный фибриноген)</li>
+                            <li>APTEM (тест на гиперфибринолиз)</li>
+                            <li>NATEM (тест без активации свертывания реагентами)</li>
+                        </ol>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
