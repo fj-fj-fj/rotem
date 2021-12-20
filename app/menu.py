@@ -12,16 +12,8 @@ menu = [
         'url': 'historical_data',
     },
     {
-        'name': 'Rotem parameters',
-        'url': 'parameters',
-    },
-    {
-        'name': 'Video instructions: Work',
-        'url': 'video_instructions_work',
-    },
-    {
-        'name': 'Video instructions: Smth',
-        'url': 'video_instructions_smth',
+        'name': 'Video instructions',
+        'url': 'video_instructions',
     },
     {
         'name': 'Interpretation of results',

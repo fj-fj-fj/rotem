@@ -56,10 +56,8 @@
 !app/templates/menu/help.html
 !app/templates/menu/historical_data.html
 !app/templates/menu/results_interpretation.html
-!app/templates/menu/rotem_parameters.html
 !app/templates/menu/rotem_tests.html
 !app/templates/menu/useful_links.html
-!app/templates/menu/video_instructions_smth.html
 !app/templates/menu/video_instructions_work.html
 
 !app/templates/base.html

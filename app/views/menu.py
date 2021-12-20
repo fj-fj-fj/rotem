@@ -18,19 +18,9 @@ def historical_data():
     return render_template('menu/historical_data.html')
 
 
-@app.route('/parameters')
-def parameters():
-    return render_template('menu/parameters.html')
-
-
-@app.route('/video-instructions/work')
-def video_instructions_work():
-    return render_template('menu/video_instructions_work.html')
-
-
-@app.route('/video-instructions/smth')
-def video_instructions_smth():
-    return render_template('menu/video_instructions_smth.html')
+@app.route('/video-instructions')
+def video_instructions():
+    return render_template('menu/video_instructions.html')
 
 
 @app.route('/interpretation-of-results', methods=['GET', 'POST'])
