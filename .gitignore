@@ -27,13 +27,26 @@
 !app/settings/
 !app/settings/base.py
 
-# static
+# static css
 !app/static
 !app/static/css
 !app/static/css/styles.css
+# static imgages
 !app/static/images/
 !app/static/images/bg-bottom.png
 !app/static/images/bg-top.png
+!app/static/images/rotem_delta.jpg
+!app/static/images/rotem_tests_basic_extem.jpg
+!app/static/images/rotem_tests_basic_intem.jpg
+!app/static/images/rotem_tests_diff_aptem_extem.jpg
+!app/static/images/rotem_tests_diff_aptem.jpg
+!app/static/images/rotem_tests_diff_fibtem_extem.jpg
+!app/static/images/rotem_tests_diff_fibtem.jpg
+!app/static/images/rotem_tests_diff_heptem_intem.jpg
+!app/static/images/rotem_tests_diff_heptem.jpg
+!app/static/images/rotem_tests_top.png
+!app/static/images/werfen.png
+#static js
 !app/static/js
 !app/static/js/script.js
 
@@ -52,13 +65,14 @@
 !app/templates/includes/menu.html
 
 !app/templates/menu/
+!app/templates/menu/_base.html
 !app/templates/menu/about.html
 !app/templates/menu/help.html
 !app/templates/menu/historical_data.html
 !app/templates/menu/results_interpretation.html
-!app/templates/menu/rotem_tests.html
+!app/templates/menu/tests.html
 !app/templates/menu/useful_links.html
-!app/templates/menu/video_instructions_work.html
+!app/templates/menu/video_instructions.html
 
 !app/templates/base.html
 !app/templates/index.html

@@ -37,7 +37,7 @@ flake8:
 	$(VENV)/bin/flake8 .
 
 styles:
-	make isort flake8 black
+	make flake8 black
 
 typos:
 	$(VENV)/bin/mypy .
@@ -58,6 +58,15 @@ check:
 # https://devcenter.heroku.com/articles/config-vars
 # https://github.com/xavdid/heroku-config:
 #   heroku plugins:install heroku-config
-
 remote-env: ## Remote: set config vars.
 	heroku config:push --file $(ENV_FILE) --app $(SERVER_APP_NAME)
+
+# cntl+c to break at any monent.
+push: check ## Pre-push hook with "interprocess communication" (make git m="message").
+	@python3 -c "import os; os.system('git diff' if input('git diff [Y/n]: ') in 'Yy' else '')"
+	git add . && git status
+	@python3 -c "import os; os.system(input())"
+	git commit -m "$m" && git log -1
+	@python3 -c "import os; os.system('git reset --soft HEAD~1' if input('Undo last commit [Y/n]: ') in 'Yy' else '')"
+	@python3 -c "import os; os.system('git push -u origin main' if input('git push [Y/n]: ') in 'Yy' else '')"
+	@python3 -c "import os; os.system('git push $(SERVER)' if input ('git push $(SERVER) [Y/n]: ') in 'Yy' else '')"
