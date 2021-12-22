@@ -1,4 +1,7 @@
-from flask import flash, render_template, request
+from flask import flash
+from flask import render_template
+from flask import request
+
 
 from app import app
 
