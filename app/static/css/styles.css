@@ -196,6 +196,21 @@ footer {
   background-color: #f7c43a;
 }
 
+/* Menu Content */
+
+.menu__page__content table tr td {
+  border: 1px solid #9E147A;
+}
+
+.menu__page__content table tr, table td {
+  padding: 20px;
+}
+
+.menu__page__content table td:first-child {
+  text-align: center;
+  background: #faf5f8;
+}
+
 /* Menu About */
 
 .menu__about__description-brand {
@@ -219,6 +234,63 @@ footer {
   text-align: center;
 }
 
+/* Menu Tests */
+
+.menu__tests__top {
+  margin: 2em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu__tests__top-wrapper {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.menu__tests__top-wrapper ul li {
+  margin: 0.3em;
+  padding: 0.2em;
+  font-weight: bold;
+}
+
+.menu__tests__top-wrapper:first-child div:first-child ul li:first-child {
+  background-color: #80B7DE;
+}
+
+.menu__tests__top-wrapper:first-child div:first-child ul li:last-child {
+  background-color: #FFABA9;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:first-child {
+  background-color: #913612;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:nth-child(2) {
+  background-color: #DDD0C8;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:last-child {
+  background-color: #B697D0;
+}
+
+.menu__tests__top-wrapper strong {
+  white-space: nowrap;
+}
+
+.menu__tests__top-wrapper span {
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+  color: grey;
+  font-weight: 600;
+}
+
+.menu__tests__top-wrapper img {
+  max-width: 80%;
+  height: auto;
+}
+
 .menu__page__content table {
   margin: 15px;
   border-collapse: collapse;
@@ -226,17 +298,8 @@ footer {
   text-align: left;
 }
 
-.menu__page__content table tr td {
-  border: 1px solid #9E147A;
-}
-
-.menu__page__content table tr, table td {
-  padding: 20px;
-}
-
-.menu__page__content table td:first-child {
-  text-align: center;
-  background: #faf5f8;
+.menu__tests__top-title {
+  display: flex;
 }
 
 /* Content */
