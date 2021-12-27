@@ -1,0 +1,21 @@
+/* Error Status Code */
+
+.error__page {
+  color: #343434;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.error__page h1 {
+  font-size: 160px;
+  font-weight: 700;
+  letter-spacing: 20px;
+}
+
+.error__page a {
+  text-decoration: none;
+}
+
+.error__page a:hover {
+  color: #e55039;
+}

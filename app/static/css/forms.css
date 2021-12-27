@@ -1,0 +1,24 @@
+/* Forms */
+
+.form-contact p {
+  margin: 10px 0 10px 0;
+}
+.form-contact input[type-submit] {
+  font-size: 10px;
+}
+
+/* Flash Messages */
+
+.flash {
+  padding: 10px;
+}
+
+.flash.success {
+  border: 1px solid #21db56;
+  background: #aeffc5;
+}
+
+.flash.error {
+  border: 1px solid #ff4343;
+  background: #ff9c9c; 
+}
