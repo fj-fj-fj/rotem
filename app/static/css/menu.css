@@ -192,3 +192,18 @@
 .menu__tests__top-title {
   display: flex;
 }
+
+article {
+  padding: 2em;
+  counter-reset: footnotes;
+}
+
+article h2 {
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+article section {
+  text-indent: 1em;
+  margin-bottom: 1em;
+}
