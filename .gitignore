@@ -36,6 +36,7 @@
 !app/static/css/menu.css
 !app/static/css/news.css
 !app/static/css/styles.css
+!app/static/css/tables.css
 # static imgages
 !app/static/images/
 !app/static/images/bg-bottom.png
