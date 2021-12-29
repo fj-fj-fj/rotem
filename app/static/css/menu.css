@@ -207,3 +207,29 @@ article section {
   text-indent: 1em;
   margin-bottom: 1em;
 }
+
+article section.article__footer {
+  border-top: 1px solid silver;
+  font-size: 80%;
+}
+
+[id^="ref"] {
+  counter-increment: footnotes;
+  text-decoration: none;
+}
+
+[id^="ref"]:after {
+  content: '[' counter(footnotes) ']';
+  vertical-align: super;
+  font-size: 60%;
+  margin-left: .1em;
+}
+
+[href^="#ref"] {
+  text-decoration: none;
+}
+
+[id^="note"]:target,
+[id^="ref"]:target {
+  background: LightBlue;
+}
