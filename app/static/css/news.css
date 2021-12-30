@@ -1,17 +1,3 @@
-/* Content */
-
-.content {
-  top: 100px;
-  margin-bottom: 120px;
-  transition: 0.5s;
-  position: relative;
-  z-index: 0;
-}
-
-.content__active {
-  transform: translateX(20%);
-}
-
 /* Articlies */
 
 .news {
@@ -20,8 +6,7 @@
 }
 
 .news__item {
-  width: 60%;
-  margin-left: 10%;
+  width: 70%;
   background: aliceblue;
   border-radius: 8px;
   display: flex;
@@ -41,4 +26,15 @@
   margin: 0;
   padding: 15px;
   padding-top: 0;
+}
+
+.news__item img {
+  width: 90%;
+  margin-left: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+.news__item a {
+  text-decoration: none;
 }

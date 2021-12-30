@@ -17,6 +17,11 @@ a {
   margin: 0;
 }
 
+h1 {
+  margin: .7em;
+  text-align: center;
+}
+
 /* Common Wrapper */
 
 .container {
@@ -71,6 +76,21 @@ header a {
 header a:hover {
   font-size: 31px;
   color: #9E147A;
+}
+
+/* Content */
+
+.content {
+  top: 100px;
+  margin-bottom: 120px;
+  margin-left: 20%;
+  transition: 0.5s;
+  position: relative;
+  z-index: 0;
+}
+
+.content__active {
+  transform: translateX(10%);
 }
 
 /* Footer */

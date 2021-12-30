@@ -50,7 +50,6 @@
   width: 60%;
   height: auto;
   margin-left: 10%;
-  padding-top: 30px;
   background-color: #fff;
   border-radius: 8px;
   display: flex;
@@ -193,8 +192,10 @@
   display: flex;
 }
 
+/* Menu Historical Data */
+
 article {
-  padding: 2em;
+  padding: 0 2em 1em 2em;
   counter-reset: footnotes;
 }
 
