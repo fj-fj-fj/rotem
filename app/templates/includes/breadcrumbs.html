@@ -1,0 +1,6 @@
+<div class="breadcrumb">
+    {% for breadcrumb in g.breadcrumbs %}
+        <a href="{{ breadcrumb.path }}">{{ breadcrumb.title }}</a>
+    {{ '/' if not loop.last }}
+{% endfor %}
+</div>

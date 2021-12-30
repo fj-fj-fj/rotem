@@ -17,6 +17,7 @@
 !app.py
 !app/
 !app/__init__.py
+!app/breadcrumbs.py
 !app/menu.py
 
 # API news
@@ -66,6 +67,7 @@
 !app/templates/errors/base_errors.html
 
 !app/templates/includes/
+!app/templates/includes/breadcrumbs.html
 !app/templates/includes/footer.html
 !app/templates/includes/header.html
 !app/templates/includes/menu.html

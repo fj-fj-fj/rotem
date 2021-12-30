@@ -78,6 +78,24 @@ header a:hover {
   color: #9E147A;
 }
 
+/* BreadCrumb */
+
+.breadcrumb {
+  margin-left: 10%;
+  margin-bottom: 3em;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  text-transform: capitalize;
+  mix-blend-mode: difference;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+  text-shadow: #F3E1EC 1px 0 10px;
+}
+
 /* Content */
 
 .content {
