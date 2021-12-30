@@ -1,30 +1,30 @@
 menu = [
     {
-        'name': 'Rotem information',
+        'name': 'информация о Rotem',
         'url': 'about',
     },
     {
-        'name': 'Rotem test details',
+        'name': 'Rotem тесты',
         'url': 'tests',
     },
     {
-        'name': 'Historical data (ТЭГ/Rotem)',
+        'name': 'исторические данные',
         'url': 'historical_data',
     },
     {
-        'name': 'Video instructions',
+        'name': 'видео инструкции',
         'url': 'video_instructions',
     },
     {
-        'name': 'Interpretation of results',
+        'name': 'интерпретация результатов',
         'url': 'results_interpretation',
     },
     {
-        'name': 'Help service',
+        'name': 'Поддержка',
         'url': 'help',
     },
     {
-        'name': 'Useful links',
+        'name': 'Полезные ссылки',
         'url': 'useful_links',
     },
 ]
