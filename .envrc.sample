@@ -1,0 +1,25 @@
+# This is a sample .envrc file for use in local development.
+# - https://direnv.net/
+# - https://github.com/direnv/direnv/wiki/Python
+# Rename this file as .envrc in the root of the project.
+# --------------------------------------------
+
+export PROJECT="$(pwd)"
+export PYTHON_VERSION="$(python3 -c 'import platform; print(platform.python_version())')"
+
+# Delete this lines or install Poetry
+export VENV=~/.cache/pypoetry/virtualenvs/<your_poetry_venv>
+poetry show --outdated
+
+# Flask
+export FLASK_DEBUG=true
+export FLASK_ENV=development
+export FLASK_APP=app.py
+export FLASK_SECRET_KEY="$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+
+# API
+export NEWSAPI_KEY='set_your_secret_token'
+
+# --------------------------------------------
+printf "\e[1;33m"; python3 -V; printf "\e[0m"
+[[ -d .git ]] && echo && git status --short --branch && git diff --stat && echo

@@ -9,15 +9,17 @@
 
 # configs
 !.editorconfig
+!.envrc.sample
 !.gitattributes
 !.gitignore
 !.jshintrc
 !.python-version
 !Makefile
-!README.md
 !poetry.lock
 !Procfile
 !pyproject.toml
+!README.md
+!requirements.txt
 
 # App
 !app.py
