@@ -1,6 +1,12 @@
 *
 # white list
 
+# CI
+!.github/
+!.github/workflows/
+!.github/workflows/main.yaml
+
+
 # configs
 !.editorconfig
 !.gitattributes
