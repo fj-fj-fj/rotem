@@ -18,9 +18,6 @@
 
 ## Установка
 ```sh
-# Просто выполните команду `make setup`, а затем добавьте переменные окружения.
-
-# Или начните настраивать все вручную:
 mkdir -p rotem && cd rotem && git clone https://github.com/fj-fj-fj/rotem.git src
 
 # Управляйте версиями Python с помощью pyenv:
@@ -35,7 +32,7 @@ source $HOME/.poetry/env
 poetry install
 # Если с Poetry что-то пошло не так:
 python3 -m venv .venv
-source .venv/bin/activate
+.venv/bin/pip install -r src/requirements.txt
 
 # Управляйте переменными окружения с помощью direnv:
 pip install -U pip && pip install -r src/requirements.txt

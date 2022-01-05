@@ -17,12 +17,6 @@ CI_CONTAINER := github-actions-pipeline
 help: # Show rule and description.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-setup: ## Clone repo into rotem/src/, create .venv into rotem/ and pip install requirements.
-	mkdir -p rotem/logs \
-	&& git -C ./rotem clone https://github.com/fj-fj-fj/rotem.git src\
-	&& $(PYTHON) -m venv rotem/.venv \
-	&& rotem/.venv/bin/pip install -r rotem/src/requirements.txt
-
 browse: ## Open root page in browser (google-chrome).
 	nohup google-chrome http://127.0.0.1:5000/ >> ../logs/chrome.log &
 
@@ -37,7 +31,6 @@ shell: ## Python3 >>>.
 
 
 ##  ================  app  ================
-
 
 run: ## Flask App: $(CMD) $(APP).
 	$(CMD) $(APP)
