@@ -25,6 +25,7 @@ curl -L https://pyenv.run | bash
 echo 'export PATH="~/.pyenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 source ~/.bashrc
+# Если с pyenv что-то пошло не так, то минимальную версию Python посмотрите в ./.python-minimal-version
 
 # Управляйте зависимостями с помощью Poetry:
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.11

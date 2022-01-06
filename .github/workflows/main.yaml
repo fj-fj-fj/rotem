@@ -40,7 +40,7 @@ jobs:
         run: poetry install --no-interaction --no-root
       #----------------------------------------------
       - name: Lint with flake8
-        run: poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+        run: poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
       #----------------------------------------------
       - name: Check formatting with black
         run: poetry run black . --check
