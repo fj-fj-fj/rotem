@@ -27,7 +27,8 @@
 !app/
 !app/__init__.py
 !app/breadcrumbs.py
-!app/menu.py
+!app/menu.
+!app/results_mapper.py
 
 # API news
 !app/news/
