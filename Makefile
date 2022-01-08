@@ -38,6 +38,11 @@ poetry-add-vendor: ## Add new Python version in _vendor (if make poetry-reinstal
 	find /home/<YOU>/.poetry/lib/poetry/_vendor/py3.<MINOR_NUMBER>/ -name '__pycache__' -exec rm -rf {} +
 	rm poetry.lock && poetry env use $$(pyenv which python) && poetry lock && poetry install
 
+# filter out the noise and be able to ask "which of the stuff that I installed directly
+# (read: listed in pyproject.toml) has new versions available?
+.PHONY: poetry-outdated
+poetry-outdated: $(eval SHELL:=/bin/bash) ## Filter this to top-level dependencies only.
+	poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)
 
 ##  ================  app  ================
 
@@ -55,7 +60,8 @@ black: ## Check styles with black.
 	$(VENV)/bin/$@ .
 
 flake8: ## Check styles with flake8.
-	$(VENV)/bin/$@ . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+	$(VENV)/bin/$@ . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics \
+	--exclude .git,.direnv,mypy_cashe,.pytest_cache,__pycache__,bin/
 
 .PHONY: styles
 styles: ## Check styles with flake8 and black.
