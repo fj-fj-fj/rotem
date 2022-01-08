@@ -54,7 +54,10 @@
         {% for cat, msg in get_flashed_messages(True) %}
             <div class="flash {{ cat }}">
                 <b>{{ msg.title }}</b>
-                {{ msg.description }}
+                <br>
+                {% autoescape false %}
+                {{ msg.description | replace("\n", "<br/>") }}
+                {% endautoescape %}
             </div>
         {% endfor %}
 
