@@ -13,9 +13,9 @@ class BaseConfiguration:
             return version_str, version_tuple
 
         with open(file_with_version) as file:
-            MININAL_VERSION_STR, MININAL_VERSION_TYPLE = _make_versions_str_tuple(file.read())
+            MININAL_VERSION_STR, MININAL_VERSION_TUPLE = _make_versions_str_tuple(file.read())
 
-        if sys.version_info < MININAL_VERSION_TYPLE:
+        if sys.version_info < MININAL_VERSION_TUPLE:
             sys.exit("\033[31m" + f"This project requires Python version {MININAL_VERSION_STR} or newer" + "\033[39m")
 
 

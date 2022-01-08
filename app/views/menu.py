@@ -1,8 +1,11 @@
+import json
+
 from flask import flash
 from flask import render_template
 from flask import request
 
 from app.breadcrumbs import register_breadcrumb
+from app.results_mapper import show_results
 
 
 from app import app
@@ -36,10 +39,13 @@ def video_instructions():
 @register_breadcrumb('интерпретация результатов', aside_menu=True)
 def results_interpretation():
     if request.method == 'POST':
-        if len(request.form['username']) >= 2:
-            flash('Succsess! :)', category='success')
+        results_interpretation_process_data = json.loads(show_results(request.form))
+        res = results_interpretation_process_data["result"]
+        results = json.loads(res)
+        if results.get("error"):
+            flash(results, category='error')
         else:
-            flash('Error! :(', category='error')
+            flash(results, category='success')
     return render_template('menu/results_interpretation.html')
 
 

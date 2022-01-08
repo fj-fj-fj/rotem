@@ -234,3 +234,16 @@ article section.article__footer {
 [id^="ref"]:target {
   background: LightBlue;
 }
+
+/* Menu Rusult Interpretation */
+
+.menu__results_interpretation-wrapper {
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__results_interpretation-wrapper img {
+  max-width: 100%;
+  height: auto;
+}

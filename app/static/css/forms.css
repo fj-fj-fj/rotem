@@ -1,16 +1,45 @@
 /* Forms */
 
-.form-contact p {
-  margin: 10px 0 10px 0;
+.form-contact {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 4px;
+  background-color: #f1dff0;
 }
-.form-contact input[type-submit] {
-  font-size: 10px;
+
+.form-contact p {
+  font-family: monospace;
+  font-style: oblique;
+  margin: 15px 0 15px 0;
+}
+
+.form-contact legend {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 1.5em;
+}
+
+.form-contact label {
+  display: inline-block;
+  display: -moz-inline-block;
+  width: 80px;
+}
+
+.form-contact input:nth-child(even) {
+  margin-right: 3em;
+}
+
+.form-contact input[type=submit] {
+  font-family: "Times New Roman", Georgia, Serif;
+  padding: 5px 15px;
+  font-size: 1em;
 }
 
 /* Flash Messages */
 
 .flash {
   padding: 10px;
+  text-align: center;
 }
 
 .flash.success {

@@ -1,18 +1,63 @@
 {% extends 'menu/_base.html' %}
 
 {% block content %}
-{{ super() }}
 <div class="menu__page__content">
-    <h3 class="menu__page__title">Interpretation of results</h3>
 
-    {% for cat, msg in get_flashed_messages(True) %}
-        <div class="flash {{ cat }}">{{ msg }}</div>
-    {% endfor %}
+    <h1>Интерпретация результатов</h1>
 
-    <form action="{{ url_for('results_interpretation') }}" method="post" class="form-contact">
-        <p><input type="text" name="username" placeholder="Enter your name:" value="" required /></p>
-        <p><input type="text" name="data" placeholder="Enter your data:" value="" required /></p>
-        <p><input type="submit" value="Send" /></p>
-    </form>
+    <div class="menu__results_interpretation-wrapper">
+        <img src="{{ url_for('static', filename='images/interpretation_values.png') }}" alt>
+
+        <form action="{{ url_for('results_interpretation') }}" method="post" class="form-contact">
+            <fieldset>
+                <legend>Введите полученные значения:</legend>
+                <p>
+                    <label for="data_extem_ct">extem ct</label>
+                    <input type="text" name="data_extem_ct" id="data_extem_ct" />
+                    <label for="data_extem_a5">extem a5</label>
+                    <input type="text" name="data_extem_a5" id="data_extem_a5" />
+                </p>
+                <p>
+                    <label for="data_intem_ct">intem ct</label>
+                    <input type="text" name="data_intem_ct" id="data_intem_ct" />
+                    <label for="data_intem_a5">intem a5</label>
+                    <input type="text" data="data_intem_a5" id="data_intem_a5" />
+                </p>
+                <p>
+                    <label for="data_fibtem_ct">fibtem ct</label>
+                    <input type="text" name="data_fibtem_ct" id="data_fibtem_ct" />
+                    <label for="data_fibtem_a5">fibtem a5</label>
+                    <input type="text" name="data_fibtem_a5" id="data_fibtem_a5" />
+                </p>
+                <p>
+                    <label for="data_heptem_ct">heptem ct</label>
+                    <input type="text" name="data_heptem_ct" id="data_heptem_ct" />
+                    <label for="data_heptem_a5">heptem a5</label>
+                    <input type="text" name="data_heptem_a5" id="data_heptem_a5" />
+                </p>
+                <p>
+                    <label for="data_aptem_ct">aptem ct</label>
+                    <input type="text" name="data_aptem_ct" id="data_aptem_ct" />
+                    <label for="data_aptem_a5">aptem a5</label>
+                    <input type="text" name="data_aptem_a5" id="data_aptem_a5" />
+                </p>
+                <p>
+                    <label for="data_natem_ct">natem ct</label>
+                    <input type="text" name="data_natem_ct" id="data_natem_ct" />
+                    <label for="data_natem_a5">natem a5</label>
+                    <input type="text" name="data_natem_a5" id="data_natem_a5" />
+                </p>
+                <p><input type="submit" value="Расчет" /></p>
+            </fieldset>
+        </form>
+
+        {% for cat, msg in get_flashed_messages(True) %}
+            <div class="flash {{ cat }}">
+                <b>{{ msg.title }}</b>
+                {{ msg.description }}
+            </div>
+        {% endfor %}
+
+    </div>
 </div>
 {% endblock %}
