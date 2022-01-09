@@ -1,8 +1,18 @@
 import json
 from enum import Enum
-from typing import Literal
+from collections.abc import Mapping
+from typing import Callable, Literal
 
 from werkzeug.datastructures import ImmutableMultiDict
+
+
+def json_dumps_ru(interpretation_data: Mapping, default: Callable | None = None) -> str:
+    """`json.dumps with `ensure_ascii=False`.
+
+    Return value can contain non-ASCII characters if they appear in strings
+    contained in obj. Otherwise, all such characters are escaped in JSON strings.
+    """
+    return json.dumps(interpretation_data, ensure_ascii=False, default=default)
 
 
 class Rotem(str, Enum):
@@ -93,24 +103,23 @@ class CaseMapper:
         for _case in vars(self).items():
             match _case:
                 case "case_1", [True, True, True, True]:
-                    return json.dumps(BleedingCorrectionTactics.HEMOSTASIS_CORRECTION_IS_NOT_SHOWN)
+                    return json_dumps_ru(BleedingCorrectionTactics.HEMOSTASIS_CORRECTION_IS_NOT_SHOWN)
                 case "case_2", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_EXTERNALLY)
+                    return json_dumps_ru(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_EXTERNALLY)
                 case "case_3", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.HEPARIN_EFFECT)
+                    return json_dumps_ru(BleedingCorrectionTactics.HEPARIN_EFFECT)
                 case "case_4", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_INTERNALLY)
+                    return json_dumps_ru(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_INTERNALLY)
                 case "case_5", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY)
+                    return json_dumps_ru(BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY)
                 # FIXME: Об этом случае нам нужно поговорить
                 # case "case_6", [True, True, True, True]:
-                #     return json.dumps(BleedingCorrectionTactics.HIPERFIBRINOLYSIS)
+                #     return json_dumps_ru(BleedingCorrectionTactics.HIPERFIBRINOLYSIS)
                 case "case_7", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.SIGNIFICIANT_THROMBOCYTOPENIA)
+                    return json_dumps_ru(BleedingCorrectionTactics.SIGNIFICIANT_THROMBOCYTOPENIA)
                 case "case_8", [True, True]:
-                    return json.dumps(
-                        BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA,
-                        ensure_ascii=False,
+                    return json_dumps_ru(
+                        BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA
                     )
                 case _:
                     bad_data_error_message = {
@@ -118,7 +127,7 @@ class CaseMapper:
                         "title": "Что-то тут не так!",
                         "description": "Проверьте еще раз свои данные",
                     }
-        return json.dumps(bad_data_error_message)
+        return json_dumps_ru(bad_data_error_message)
 
     def __repr__(self):
         return f"{self.__class__.__name__}({vars(self)})"
@@ -203,4 +212,4 @@ class ResultInterpreter:
 
 
 def show_results(post_form_data: ImmutableMultiDict) -> str:
-    return json.dumps(ResultInterpreter(post_form_data), default=vars)
+    return json_dumps_ru(ResultInterpreter(post_form_data), default=vars)
