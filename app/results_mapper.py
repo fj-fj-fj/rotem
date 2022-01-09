@@ -91,25 +91,26 @@ class CaseMapper:
     def search_case(self) -> str:
         """Find case for entered data and return its interpretation."""
         for _case in vars(self).items():
-            match _case:  # type: ignore
+            match _case:
                 case "case_1", [True, True, True, True]:
-                    return json.dumps(BleedingCorrectionTactics.HEMOSTASIS_CORRECTION_IS_NOT_SHOWN.value)
+                    return json.dumps(BleedingCorrectionTactics.HEMOSTASIS_CORRECTION_IS_NOT_SHOWN)
                 case "case_2", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_EXTERNALLY.value)
-                case "case_3", [True, True, True, True]:
-                    return json.dumps(BleedingCorrectionTactics.HEPARIN_EFFECT.value)
+                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_EXTERNALLY)
+                case "case_3", [True, True]:
+                    return json.dumps(BleedingCorrectionTactics.HEPARIN_EFFECT)
                 case "case_4", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_INTERNALLY.value)
+                    return json.dumps(BleedingCorrectionTactics.DEFICIENCY_OF_FACTORS_INTERNALLY)
                 case "case_5", [True, True]:
-                    return json.dumps(BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY.value)
+                    return json.dumps(BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY)
                 # FIXME: Об этом случае нам нужно поговорить
-                # case {"case_6": [True, True, True, True]}:
-                #     return json.dumps(BleedingCorrectionTactics.HIPERFIBRINOLYSIS.value)
-                case {"case_7": [True, True]}:
-                    return json.dumps(BleedingCorrectionTactics.SIGNIFICIANT_THROMBOCYTOPENIA.value)
-                case {"case_8": [True, True]}:
+                # case "case_6", [True, True, True, True]:
+                #     return json.dumps(BleedingCorrectionTactics.HIPERFIBRINOLYSIS)
+                case "case_7", [True, True]:
+                    return json.dumps(BleedingCorrectionTactics.SIGNIFICIANT_THROMBOCYTOPENIA)
+                case "case_8", [True, True]:
                     return json.dumps(
-                        BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA.value
+                        BleedingCorrectionTactics.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA,
+                        ensure_ascii=False,
                     )
                 case _:
                     bad_data_error_message = {
@@ -139,55 +140,50 @@ class ResultInterpreter:
         """
         filled_user_data = self.filter()
         for filled_input_form_field in filled_user_data:
-            match filled_input_form_field:  # type: ignore
-                # CaseMapper.case_1
-                case Rotem.EXTEM_CT.value, value if int(value) in range(40, 81):
+            match filled_input_form_field:
+
+                case Rotem.EXTEM_CT, value if int(value) in range(40, 80):
                     self.case_mapper.case_1.append(True)
-                case Rotem.INTEM_CT.value, value if int(value) in range(100, 240):
-                    self.case_mapper.case_1.append(True)
-                case Rotem.EXTEM_A5.value, value if int(value) in range(37, ResultInterpreter.MAXSIZE):
-                    self.case_mapper.case_1.append(True)
-                case Rotem.FIBTEM_A5.value, value if int(value) in range(8, ResultInterpreter.MAXSIZE):
-                    self.case_mapper.case_1.append(True)
-                # CaseMapper.case_2
-                case Rotem.EXTEM_CT.value, value if int(value) in range(80, ResultInterpreter.MAXSIZE):
+                    self.case_mapper.case_3.append(True)
+                case Rotem.EXTEM_CT, value if int(value) in range(80, ResultInterpreter.MAXSIZE):
                     self.case_mapper.case_2.append(True)
-                case Rotem.FIBTEM_A5.value, value if int(value) in range(8, ResultInterpreter.MAXSIZE):
+
+                case Rotem.EXTEM_A5, value if int(value) in range(25):
+                    self.case_mapper.case_7.append(True)
+                    self.case_mapper.case_8.append(True)
+                case Rotem.EXTEM_A5, value if int(value) in range(25, 35):
+                    self.case_mapper.case_5.append(True)
+                    self.case_mapper.case_7.append(True)
+                case Rotem.EXTEM_A5, value if int(value) in range(37, ResultInterpreter.MAXSIZE):
+                    self.case_mapper.case_1.append(True)
+
+                case Rotem.INTEM_CT, value if float(value) < .8:
+                    self.case_mapper.case_3.append(True)
+                case Rotem.INTEM_CT, value if int(value) in range(100, 240):
+                    self.case_mapper.case_1.append(True)
+                case Rotem.INTEM_CT, value if int(value) in range(240, ResultInterpreter.MAXSIZE):
+                    self.case_mapper.case_3.append(True)
+                    self.case_mapper.case_4.append(True)
+
+                case Rotem.FIBTEM_A5, value if int(value) in range(8):
+                    self.case_mapper.case_5.append(True)
+                    self.case_mapper.case_8.append(True)
+                case Rotem.FIBTEM_A5, value if int(value) in range(8, ResultInterpreter.MAXSIZE):
+                    self.case_mapper.case_1.append(True)
                     self.case_mapper.case_2.append(True)
-                # CaseMapper.case_3
-                case Rotem.INTEM_CT.value, value if int(value) in range(240, ResultInterpreter.MAXSIZE):
+                    self.case_mapper.case_7.append(True)
+
+                case Rotem.HEPTEM_CT, value if float(value) < .8:
                     self.case_mapper.case_3.append(True)
-                case Rotem.HEPTEM_CT.value, value if int(value) in range(241):
+                case Rotem.HEPTEM_CT, value if int(value) in range(240):
                     self.case_mapper.case_3.append(True)
-                case Rotem.INTEM_CT.value, value if float(value) < .8:
-                    self.case_mapper.case_3.append(True)
-                case Rotem.HEPTEM_CT.value, value if float(value) < .8:
-                    self.case_mapper.case_3.append(True)
-                # CaseMapper.case_4
-                case Rotem.INTEM_CT.value, value if int(value) in range(240, ResultInterpreter.MAXSIZE):
+                case Rotem.HEPTEM_CT, value if int(value) in range(240, ResultInterpreter.MAXSIZE):
                     self.case_mapper.case_4.append(True)
-                case Rotem.HEPTEM_CT.value, value if int(value) in range(240, ResultInterpreter.MAXSIZE):
-                    self.case_mapper.case_4.append(True)
-                # CaseMapper.case_5
-                case Rotem.EXTEM_A5.value, value if int(value) in range(35):
-                    self.case_mapper.case_5.append(True)
-                case Rotem.FIBTEM_A5.value, value if int(value) in range(8):
-                    self.case_mapper.case_5.append(True)
-                # CaseMapper.case_6
+
                 # FIXME: Об этом случае нам нужно поговорить
                 # case ?:
                 #     self.case_mapper.case_6.append(True)
-                # CaseMapper.case_7
-                case Rotem.EXTEM_A5.value, value if int(value) in range(35):
-                    self.case_mapper.case_7.append(True)
-                case Rotem.FIBTEM_A5.value, value if int(value) in range(8, ResultInterpreter.MAXSIZE):
-                    self.case_mapper.case_7.append(True)
-                # CaseMapper.case_8
-                case Rotem.EXTEM_A5.value, value if int(value) in range(25):
-                    self.case_mapper.case_8.append(True)
-                case Rotem.FIBTEM_A5.value, value if int(value) in range(8):
-                    self.case_mapper.case_8.append(True)
-                # CaseMapper.case_0
+
                 case _:
                     self.case_mapper.case_0.append(True)
 
