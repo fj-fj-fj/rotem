@@ -27,6 +27,7 @@
 !app/
 !app/__init__.py
 !app/breadcrumbs.py
+!app/custom_types.py
 !app/menu.
 !app/results_mapper.py
 

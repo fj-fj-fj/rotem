@@ -5,6 +5,8 @@ from typing import Callable, Literal
 
 from werkzeug.datastructures import ImmutableMultiDict
 
+from app.custom_types import frozendict
+
 
 def json_dumps_ru(interpretation_data: Mapping, default: Callable | None = None) -> str:
     """`json.dumps with `ensure_ascii=False`.
@@ -33,11 +35,11 @@ class Rotem(str, Enum):
 class BleedingCorrectionTactics(dict, Enum):
     """Interpretations of results (Rotem tests)."""
 
-    HEMOSTASIS_CORRECTION_IS_NOT_SHOWN = {
+    HEMOSTASIS_CORRECTION_IS_NOT_SHOWN = frozendict({
         "title": "Коррекция гемостаза не показана",
         "description": "При коровотечении акцент на хирургический гемостаз",
-    }
-    DEFICIENCY_OF_FACTORS_EXTERNALLY = {
+    })
+    DEFICIENCY_OF_FACTORS_EXTERNALLY = frozendict({
         "title": "Дефицит факторов внешнего пути",
         "description": (
             "(Ауто)плазма 10-15 мл/кг или\n"
@@ -46,37 +48,37 @@ class BleedingCorrectionTactics(dict, Enum):
             "CT EXTEM 101-120 сек - 15 МЕ/кг\n"
             "CT EXTEM >120 сек – 22,5 МЕ/кг"
         ),
-    }
-    HEPARIN_EFFECT = {
+    })
+    HEPARIN_EFFECT = frozendict({
         "title": "Эффект гепарина",
         "description": "Протамин 0,25-0,5 мг/кг",
-    }
-    DEFICIENCY_OF_FACTORS_INTERNALLY = {
+    })
+    DEFICIENCY_OF_FACTORS_INTERNALLY = frozendict({
         "title": "Дефицит факторов внутреннего пути",
         "description": "(Ауто)плазма 10-15 мл/кг",
-    }
-    FIBRINOGEN_DEFICIENCY = {
+    })
+    FIBRINOGEN_DEFICIENCY = frozendict({
         "title": "Дефицит фибриногена",
         "description": "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)"
-    }
-    HIPERFIBRINOLYSIS = {
+    })
+    HIPERFIBRINOLYSIS = frozendict({
         "title": "Гиперфибринолиз",
         "description": (
             "Транексам/ЭАКК\n"
             "При признаках гипофибриногенемии - криопреципитат в расчетной дозе"
         ),
-    }
-    SIGNIFICIANT_THROMBOCYTOPENIA = {
+    })
+    SIGNIFICIANT_THROMBOCYTOPENIA = frozendict({
         "title": "Значимая тромбоцитопения",
         "description": "Тромбоцитный концентрат",
-    }
-    FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = {
+    })
+    FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = frozendict({
         "title": "Дефицит фибриногена и значимая тромбоцитопения",
         "description": (
             "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)\n"
             "Тромбоцитный концентрат"
         ),
-    }
+    })
 
 
 class CaseMapper:
