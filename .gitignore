@@ -15,6 +15,7 @@
 !.jshintrc
 !.python-version
 !.python-minimal-version
+!conftest.py
 !Makefile
 !poetry.lock
 !Procfile
@@ -102,3 +103,7 @@
 !app/views/errors.py
 !app/views/menu.py
 !app/views/routes.py
+
+# Tests
+!tests/
+!tests/test_results_mapper.py

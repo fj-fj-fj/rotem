@@ -3,7 +3,7 @@ PIP := $(VENV)/bin/pip
 CMD := poetry run
 PYTHON := $(VENV)/bin/python3
 PYTHON_VERSION := $(PYTHON_VERSION)
-CURRENT_MININAL_PYTHON_VERSION := $(MININAL_PYTHON_VERSION)
+CURRENT_MININAL_PYTHON_VERSION := $(PYTHON_MINIMAL_VERSION)
 
 ENV_FILE := .envrc
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -61,7 +61,7 @@ black: ## Check styles with black.
 
 flake8: ## Check styles with flake8.
 	$(VENV)/bin/$@ . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics \
-	--exclude .git,.direnv,mypy_cashe,.pytest_cache,__pycache__,bin/
+	--exclude .git,.direnv,mypy_cashe,.pytest_cache,__pycache__,bin/,tests
 
 .PHONY: styles
 styles: ## Check styles with flake8 and black.
@@ -79,11 +79,17 @@ vermin: ## Check minimal required Python versions.
 	@../../../.VENV_COMMON/bin/$@ -q . | head -1 | awk -F": " '{ print $$2 }'
 
 
+##  ================ Testing  ================
+
+pytest: ## Test app with pytest.
+	$(VENV)/bin/$@ .
+
+
 ##  ================ Commit/Push  ================
 
 # cntl+c to break at any monent.
 .PHONY: push
-push: check ## Pre-push hook with "interprocess communication" (make git m="message").
+push: check pytest ## Pre-push hook with "interprocess communication" (make git m="message").
 	@poetry show --outdated
 	@echo "Current minimal Python version: \e[1;33m$(CURRENT_MININAL_PYTHON_VERSION)\e[0m"
 	@echo "Actual Python version: \e[1;33m$$(make vermin)\e[0m"
