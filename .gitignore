@@ -107,3 +107,4 @@
 # Tests
 !tests/
 !tests/test_results_mapper.py
+!tests/test_views.py
