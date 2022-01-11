@@ -25,6 +25,7 @@ mypy = "^0.931"
 pytest = "^6.2.5"
 coverage = "^6.1.2"
 black = "^21.12b0"
+blinker = "^1.4"
 
 
 [build-system]
