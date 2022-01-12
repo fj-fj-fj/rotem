@@ -1,7 +1,7 @@
 from werkzeug.datastructures import ImmutableMultiDict
 
 from app import app
-from conftest import captured_templates
+from tests.conftest import captured_templates
 
 
 client = app.test_client()

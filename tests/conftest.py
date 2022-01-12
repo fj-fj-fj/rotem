@@ -1,9 +1,14 @@
+import os
+import sys
 from contextlib import contextmanager
 from typing import Generator
 
 from flask import Flask
 from flask import template_rendered
 from jinja2.environment import Template
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(ROOT_DIR)
 
 
 @contextmanager
