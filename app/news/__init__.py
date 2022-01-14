@@ -3,7 +3,7 @@ from typing import Optional
 
 from newsapi import NewsApiClient
 
-NEWSAPI_KEY = os.getenv('NEWSAPI_KEY')
+NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
 
 
 def init_news(api_key: Optional[str] = NEWSAPI_KEY) -> NewsApiClient:
@@ -12,11 +12,11 @@ def init_news(api_key: Optional[str] = NEWSAPI_KEY) -> NewsApiClient:
 
 def fetch_top_headlines(
     newsapi=init_news(),
-    q='medicine',
-    sources='all',
-    category='medical',
-    language='en',
-    country='us',
+    q="medicine",
+    sources="all",
+    category="medical",
+    language="en",
+    country="us",
 ) -> NewsApiClient:
     """/v2/top-headlines"""
     top_headlines = newsapi.get_top_headlines(
@@ -31,13 +31,13 @@ def fetch_top_headlines(
 
 def fetch_all_articles(
     newsapi=init_news(),
-    q='covid',
+    q="covid",
     sources=None,
     domains=None,
     from_param=None,
     to=None,
-    language='en',
-    sort_by='relevancy',
+    language="en",
+    sort_by="relevancy",
     page=5,
 ) -> NewsApiClient:
     """/v2/everything"""

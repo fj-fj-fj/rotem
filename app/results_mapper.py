@@ -35,50 +35,62 @@ class Rotem(str, Enum):
 class BleedingCorrectionTactics(dict, Enum):
     """Interpretations of results (Rotem tests)."""
 
-    HEMOSTASIS_CORRECTION_IS_NOT_SHOWN = frozendict({
-        "title": "Коррекция гемостаза не показана",
-        "description": "При коровотечении акцент на хирургический гемостаз",
-    })
-    DEFICIENCY_OF_FACTORS_EXTERNALLY = frozendict({
-        "title": "Дефицит факторов внешнего пути",
-        "description": (
-            "(Ауто)плазма 10-15 мл/кг или\n"
-            "Концентрат протромбинового комплекса (Протромплекс, Октаплекс)\n"
-            "CT EXTEM 81-100 сек - 7,5 МЕ/кг\n"
-            "CT EXTEM 101-120 сек - 15 МЕ/кг\n"
-            "CT EXTEM >120 сек – 22,5 МЕ/кг"
-        ),
-    })
-    HEPARIN_EFFECT = frozendict({
-        "title": "Эффект гепарина",
-        "description": "Протамин 0,25-0,5 мг/кг",
-    })
-    DEFICIENCY_OF_FACTORS_INTERNALLY = frozendict({
-        "title": "Дефицит факторов внутреннего пути",
-        "description": "(Ауто)плазма 10-15 мл/кг",
-    })
-    FIBRINOGEN_DEFICIENCY = frozendict({
-        "title": "Дефицит фибриногена",
-        "description": "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)"
-    })
-    HIPERFIBRINOLYSIS = frozendict({
-        "title": "Гиперфибринолиз",
-        "description": (
-            "Транексам/ЭАКК\n"
-            "При признаках гипофибриногенемии - криопреципитат в расчетной дозе"
-        ),
-    })
-    SIGNIFICIANT_THROMBOCYTOPENIA = frozendict({
-        "title": "Значимая тромбоцитопения",
-        "description": "Тромбоцитный концентрат",
-    })
-    FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = frozendict({
-        "title": "Дефицит фибриногена и значимая тромбоцитопения",
-        "description": (
-            "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)\n"
-            "Тромбоцитный концентрат"
-        ),
-    })
+    HEMOSTASIS_CORRECTION_IS_NOT_SHOWN = frozendict(
+        {
+            "title": "Коррекция гемостаза не показана",
+            "description": "При коровотечении акцент на хирургический гемостаз",
+        }
+    )
+    DEFICIENCY_OF_FACTORS_EXTERNALLY = frozendict(
+        {
+            "title": "Дефицит факторов внешнего пути",
+            "description": (
+                "(Ауто)плазма 10-15 мл/кг или\n"
+                "Концентрат протромбинового комплекса (Протромплекс, Октаплекс)\n"
+                "CT EXTEM 81-100 сек - 7,5 МЕ/кг\n"
+                "CT EXTEM 101-120 сек - 15 МЕ/кг\n"
+                "CT EXTEM >120 сек – 22,5 МЕ/кг"
+            ),
+        }
+    )
+    HEPARIN_EFFECT = frozendict(
+        {
+            "title": "Эффект гепарина",
+            "description": "Протамин 0,25-0,5 мг/кг",
+        }
+    )
+    DEFICIENCY_OF_FACTORS_INTERNALLY = frozendict(
+        {
+            "title": "Дефицит факторов внутреннего пути",
+            "description": "(Ауто)плазма 10-15 мл/кг",
+        }
+    )
+    FIBRINOGEN_DEFICIENCY = frozendict(
+        {
+            "title": "Дефицит фибриногена",
+            "description": "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)",
+        }
+    )
+    HIPERFIBRINOLYSIS = frozendict(
+        {
+            "title": "Гиперфибринолиз",
+            "description": ("Транексам/ЭАКК\n" "При признаках гипофибриногенемии - криопреципитат в расчетной дозе"),
+        }
+    )
+    SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
+        {
+            "title": "Значимая тромбоцитопения",
+            "description": "Тромбоцитный концентрат",
+        }
+    )
+    FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
+        {
+            "title": "Дефицит фибриногена и значимая тромбоцитопения",
+            "description": (
+                "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)\n" "Тромбоцитный концентрат"
+            ),
+        }
+    )
 
 
 class CaseMapper:
@@ -168,7 +180,7 @@ class ResultInterpreter:
                 case Rotem.EXTEM_A5, value if int(value) in range(37, ResultInterpreter.MAXSIZE):
                     self.case_mapper.case_1.append(True)
 
-                case Rotem.INTEM_CT, value if float(value) < .8:
+                case Rotem.INTEM_CT, value if float(value) < 0.8:
                     self.case_mapper.case_3.append(True)
                 case Rotem.INTEM_CT, value if int(value) in range(100, 240):
                     self.case_mapper.case_1.append(True)
@@ -184,7 +196,7 @@ class ResultInterpreter:
                     self.case_mapper.case_2.append(True)
                     self.case_mapper.case_7.append(True)
 
-                case Rotem.HEPTEM_CT, value if float(value) < .8:
+                case Rotem.HEPTEM_CT, value if float(value) < 0.8:
                     self.case_mapper.case_3.append(True)
                 case Rotem.HEPTEM_CT, value if int(value) in range(240):
                     self.case_mapper.case_3.append(True)

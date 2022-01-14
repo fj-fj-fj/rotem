@@ -13,14 +13,14 @@ from app.views.menu import *  # noqa: F401 F403
 @app.context_processor
 def common_data():
     return {
-        'menu': menu,
-        'current_year': datetime.now().year,
+        "menu": menu,
+        "current_year": datetime.now().year,
     }
 
 
-@app.route('/news')
-@app.route('/')
-@register_breadcrumb('Новости')
+@app.route("/news")
+@app.route("/")
+@register_breadcrumb("Новости")
 def index():
-    all_articles = fetch_all_articles()['articles']
-    return render_template('index.html', articles=all_articles)
+    all_articles = fetch_all_articles()["articles"]
+    return render_template("index.html", articles=all_articles)

@@ -1,15 +1,16 @@
+"""App configuration."""
 import os
 import sys
 
 
 class BaseConfiguration:
-
     @staticmethod
-    def validate_python_version(file_with_version: str = '.python-minimal-version'):
+    def validate_python_version(file_with_version: str = ".python-minimal-version"):
         """None if `sys.version_info` >= minimal Python version for this project or raise SystemExit."""
+
         def _make_versions_str_tuple(read_file):
             version_str: str = read_file.strip()
-            version_tuple: tuple[int, ...] = tuple(int(n) for n in version_str.split('.') if n != '.')
+            version_tuple: tuple[int, ...] = tuple(int(n) for n in version_str.split(".") if n != ".")
             return version_str, version_tuple
 
         with open(file_with_version) as file:
@@ -20,7 +21,8 @@ class BaseConfiguration:
 
 
 class FlaskConfiguration(BaseConfiguration):
+    """Set Flask configuration variables from .envrc file."""
 
-    FLASK_APP = os.getenv('FLASK_APP')
-    FLASK_ENV = os.getenv('FLASK_ENV')
-    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
+    FLASK_APP = os.getenv("FLASK_APP")
+    FLASK_ENV = os.getenv("FLASK_ENV")
+    SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
