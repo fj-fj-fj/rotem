@@ -60,10 +60,11 @@ line-length = 120
 # Regex that matches files and dirs that should be excluded on recursive searches:
 exclude = '''
 /(
-    \.git
+    \.direnv
+  | \.git
   | \.mypy_cache
   | \.pytest_cache
-  | \.direnv
+  | \.venv
 )/
 '''
 
