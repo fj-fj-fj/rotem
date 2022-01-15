@@ -209,6 +209,14 @@ article section {
   margin-bottom: 1em;
 }
 
+article section img:nth-child(even) {
+  margin-left: 3em;
+}
+
+article section img:nth-child(odd) {
+  width: 99%;
+}
+
 article section.article__footer {
   border-top: 1px solid silver;
   font-size: 80%;

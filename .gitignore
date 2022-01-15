@@ -54,6 +54,9 @@
 !app/static/images/
 !app/static/images/bg-bottom.png
 !app/static/images/bg-top.png
+!app/static/images/historical_data__parametry_analizov_rotem_1.jpg
+!app/static/images/historical_data__parametry_analizov_rotem_2.jpg
+!app/static/images/historical_data__printsip_tehnologii_rotem_delta.jpg
 !app/static/images/interpretation_values.png
 !app/static/images/rotem_delta.jpg
 !app/static/images/rotem_tests_basic_extem.jpg
