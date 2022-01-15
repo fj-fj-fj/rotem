@@ -29,6 +29,10 @@
   margin-right: 3em;
 }
 
+.form-contact input[type=text] {
+  width: 10%;
+}
+
 .form-contact input[type=submit] {
   font-family: "Times New Roman", Georgia, Serif;
   padding: 5px 15px;
