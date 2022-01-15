@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rotem"
 version = "0.1.0"
-description = "Website about the Rotem and medicine news agregator."
+description = "Interpretation of Rotem results and medicine news agregator."
 authors = [
     "fj-fj-fj <x1x1xx0@protonmail.com>"
 ]
@@ -10,8 +10,8 @@ readme = "README.md"
 
 
 [tool.poetry.dependencies]
-# Heroku fail: Read Python version from poetry.lock and ^3.9.0 is not valid
-# python = "^3.9.0"
+# NOTE: use python = "^3.9.0" without "^"
+# HEROKU FAIL: Read Python version from poetry.lock and ^3.9.0 is not valid
 python = "3.10.0"
 Flask = "^2.0.2"
 newsapi-python = "^0.2.6"
@@ -33,61 +33,128 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 
+# isort configuration
+# -------------------
 [tool.isort]
+# Tells to set the known standard library based on the specified Python version:
 py_version = 310
+# Base profile type to use for configuration:
 profile = "black"
+# Forces all from imports to appear on their own line:
 force_single_line = true
-combine_as_imports = true
+# The number of lines to place between direct and from imports:
 lines_between_types = 1
+# The number of blank lines to place after imports:
 lines_after_imports = 2
+# Add an explicitly defined source path:
 src_paths = ["src", "tests"]
-extend_skip = ["setup.py"]
 
 
+# black configuration
+# -------------------
 [tool.black]
+# Python versions that should be supported by Black's output:
 target-version = ['py310']
-force-exclude = '''
-.*/setup\.py$
+# How many characters per line to allow:
+line-length = 120
+# Regex that matches files and dirs that should be excluded on recursive searches:
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.direnv
+)/
 '''
 
 
-# https://github.com/python-poetry/poetry/pull/4510
+# mypy configuration
+# ------------------
+#
 [tool.mypy]
+# Specifies the Python version used to parse and check the target program:
 python_version = "3.10"
+# Disallows defining functions with incomplete type annotations:
 check_untyped_defs = true
+# Suppresses error messages about imports that cannot be resolved:
 ignore_missing_imports = true
+# Warns about casting an expression to its inferred type:
 warn_redundant_casts = true
-warn_unused_configs = true
+# Warns about unneeded `# type: ignore` comments:
 warn_unused_ignores = true
+# A comma-separated list of paths which should be checked by mypy if none are given on the CLI:
 files = "src"
 
-
+# Multi-module specific section:
 [[tool.mypy.overrides]]
+# Array of modules:
 module = [
+    # 'module1'
+    # 'module2' etc
 ]
+# Ignores all non-fatal errors:
 ignore_errors = true
 
 
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "if TYPE_CHECKING:"
-]
-
 # pytest configuraion
 # -------------------
-# minversion (string): minimally required pytest version.
-# addopts (args): extra command line options.
-#  -r chars: show extra test summary info as specified by chars, (a)ll except passed.
-#  -q, --quiet: decrease verbosity.
-#  -s: shortcut for --capture=no.
-# testpaths (args): directories to search for tests when no files or directories are given in the command line.
-# * `poetry run pytest --help` to see more commands.
 #
 [tool.pytest.ini_options]
+# Minimally required pytest version:
 minversion = "6.0"
+# Extra command line options (
+#  -r chars: show extra test summary info as specified by chars, (a)ll except passed.
+#  -q, --quiet: decrease verbosity.
+#  -s: shortcut for --capture=no):
 addopts = "-ra -q -s"
+# Directories to search for tests when no files or directories are given in the command line:
 testpaths = [
     "tests",
     "integration",
 ]
+
+
+# coverage configuration
+# ----------------------
+#
+[tool.coverage.run]
+# Whether to measure branch coverage in addition to statement coverage:
+branch = true
+# The name of the data file to use for storing or reporting coverage:
+data_file = "tests/.coverage"
+# A list of file name patterns, the files to leave out of measurement or reporting:
+omit = [
+    "*tests*",
+    "*__init__*"
+]
+
+# Values common to many kinds of reporting.
+[tool.coverage.report]
+# A target coverage percentage (If the total coverage measurement
+# is under this value, then exit with a status code of 2):
+fail_under = 80
+# Regexes for lines to exclude from consideration:
+exclude_lines = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self.debug:",
+
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == '__main__':",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod"
+]
+
+# Values particular to HTML reporting.
+[tool.coverage.html]
+# Where to write the HTML report files:
+directory = "tests/htmlcov"
