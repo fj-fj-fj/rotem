@@ -81,11 +81,18 @@ vermin: ## Check minimal required Python versions.
 
 ##  ================ Testing  ================
 
+
 pytest: ## Test app with pytest.
 	$(VENV)/bin/$@ .
 
+coverage: ## Measure code with coverage.
+	@$(VENV)/bin/$@ run --source=. -m pytest .
+	@$(VENV)/bin/$@ report -m
+	@$(VENV)/bin/$@ html
+
 
 ##  ================ Commit/Push  ================
+
 
 # cntl+c to break at any monent.
 .PHONY: push
