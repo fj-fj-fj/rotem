@@ -3,6 +3,7 @@ import json
 from flask import flash
 from flask import render_template
 from flask import request
+from flask import session
 
 from app.breadcrumbs import register_breadcrumb
 from app.results_mapper import show_results
@@ -39,6 +40,9 @@ def video_instructions():
 @register_breadcrumb("интерпретация результатов", aside_menu=True)
 def results_interpretation():
     if request.method == "POST":
+        if category := [c for c in request.form if "clicked_category_button" in c]:
+            cat = json.loads(category[0])
+            session["clicked_category_button"] = cat["clicked_category_button"]
         results_interpretation_process_data = json.loads(show_results(request.form))
         res = results_interpretation_process_data["result"]
         results = json.loads(res)

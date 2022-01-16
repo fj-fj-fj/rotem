@@ -8,7 +8,14 @@
     <div class="menu__results_interpretation-wrapper">
         <img src="{{ url_for('static', filename='images/interpretation_values.png') }}" alt>
 
-        <form action="{{ url_for('results_interpretation') }}" method="post" class="form-contact">
+        <h2>Выберите категорию тестов</h2>
+        <div class="results_interpretation__categories">
+            <input id="obsteric_category" name="category_button" type="submit" value="Акушерство">
+            <input id="surgery_category" name="category_button" type="submit" value="Хирургия">
+            <input id="covid_category" name="category_button" type="submit" value="Ковид-19">
+        </div>
+
+        <form action="{{ url_for('results_interpretation') }}" method="post" id="form_surgery" class="form-contact">
             <fieldset>
                 <legend>Введите полученные значения:</legend>
                 <p>
@@ -40,6 +47,31 @@
                     <input type="text" name="data_aptem_ct" id="data_aptem_ct" />
                     <label for="data_aptem_a5">aptem a5</label>
                     <input type="text" name="data_aptem_a5" id="data_aptem_a5" />
+                </p>
+                <p>
+                    <label for="data_natem_ct">natem ct</label>
+                    <input type="text" name="data_natem_ct" id="data_natem_ct" />
+                    <label for="data_natem_a5">natem a5</label>
+                    <input type="text" name="data_natem_a5" id="data_natem_a5" />
+                </p>
+                <p><input type="submit" value="Расчет" /></p>
+            </fieldset>
+        </form>
+
+        <form action="{{ url_for('results_interpretation') }}" method="post" id="form_covid" class="form-contact">
+            <fieldset>
+                <legend>Введите полученные значения:</legend>
+                <p>
+                    <label for="data_intem_ct">intem ct</label>
+                    <input type="text" name="data_intem_ct" id="data_intem_ct" />
+                    <label for="data_intem_a5">intem a5</label>
+                    <input type="text" data="data_intem_a5" id="data_intem_a5" />
+                </p>
+                <p>
+                    <label for="data_heptem_ct">heptem ct</label>
+                    <input type="text" name="data_heptem_ct" id="data_heptem_ct" />
+                    <label for="data_heptem_a5">heptem a5</label>
+                    <input type="text" name="data_heptem_a5" id="data_heptem_a5" />
                 </p>
                 <p>
                     <label for="data_natem_ct">natem ct</label>

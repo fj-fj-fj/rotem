@@ -6,6 +6,7 @@
   padding: 1em;
   border-radius: 4px;
   background-color: #f1dff0;
+  display: none;
 }
 
 .form-contact p {
@@ -37,6 +38,29 @@
   font-family: "Times New Roman", Georgia, Serif;
   padding: 5px 15px;
   font-size: 1em;
+}
+
+.results_interpretation__categories {
+  display: flex;
+  justify-content: center;
+}
+
+.results_interpretation__categories input[type=submit] {
+  margin: 2em;
+  width: 10em;
+  height: 4em;
+  border-radius: 5px;
+  border-color:#B64297;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 1em;
+}
+
+.results_interpretation__categories input[type=submit]:hover {
+  background-color:#F1DFF0;
+}
+
+.results_interpretation__categories input[type=submit]:active {
+  background-color:#B64297;
 }
 
 /* Flash Messages */

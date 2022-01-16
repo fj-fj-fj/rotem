@@ -59,6 +59,11 @@
   box-shadow: 10px 10px 10px rgb(102, 101, 101);
 }
 
+.menu__page__content h2{
+  margin-top: 2em;
+  text-align: center;
+}
+
 .menu__page__title {
   margin-bottom: 30px;
 }
