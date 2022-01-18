@@ -123,10 +123,15 @@
   margin-bottom: 10px;
 }
 
-.menu__about_description-body {
+.menu__about__description-body {
   margin: 10px 15px;
   display: flex;
   flex-direction: column;
+}
+
+.menu__about__description-body p:first-child {
+  margin: 1em;
+  text-indent: 1em;
 }
 
 .menu__about__spec-title {
