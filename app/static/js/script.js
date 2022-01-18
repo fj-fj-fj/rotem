@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
      * Send data to server side.
      * 
      * @param {string} category - clicked category button
-     * @returns {null}
      */
     function callAjax(category) {
         const clickedCategoryBtn = JSON.stringify({
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // interpretation-of-results page
     if (testCategories) {
-        [...testCategories.children].forEach(item => {
+        [...testCategories.children].forEach(/** @type string */ item => {
 
             // Check localStorage and set values if exists
             const formStorage = localStorage.getItem('form');
