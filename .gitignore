@@ -13,10 +13,11 @@
 # 'interpretation-of-the-result' package.
 !app/interpretation/
 !app/interpretation/__init__.py
+!app/interpretation/abc.py
 !app/interpretation/enums.py
 !app/interpretation/errors.py
 !app/interpretation/mappers.py
-!app/interpretation/setter.py
+!app/interpretation/setters.py
 
 # 'news' package.
 !app/news/

@@ -668,6 +668,8 @@ def test__ResulstInterpreter__str__(request_form, expected):
     ],
 )
 def test__flash_message_has_expected_css_class(POST_data, expected):
+    with client.session_transaction() as session:
+        session["clicked_category_button"] = "surgery_category"
     res = client.post(URN, data=POST_data)
     assert res.status_code == STATUS_CODE_OK
     regex_pattern = expected

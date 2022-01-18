@@ -64,6 +64,8 @@ def test_video_instructions_view():
 
 def test_results_interpretation_view_get():
     with captured_templates(app) as templates:
+        with client.session_transaction() as session:
+            session["clicked_category_button"] = "surgery_category"
         r = client.get("/interpretation-of-results")
         assert r.status_code == 200
         assert len(templates) == 1
@@ -75,6 +77,8 @@ def test_results_interpretation_view_get():
 
 def test_results_interpretation_view_post_and_flash_message_error():
     with captured_templates(app) as templates:
+        with client.session_transaction() as session:
+            session["clicked_category_button"] = "surgery_category"
         r = client.post("/interpretation-of-results", data=ImmutableMultiDict([("data_extem_ct", 1)]))
         assert r.status_code == 200
         assert len(templates) == 1

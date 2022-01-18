@@ -6,7 +6,7 @@ from flask import request
 from flask import session
 
 from app.breadcrumbs import register_breadcrumb
-from app.results_mapper import show_results
+from app.interpretation import show_results
 
 
 from app import app
@@ -40,16 +40,23 @@ def video_instructions():
 @register_breadcrumb("интерпретация результатов", aside_menu=True)
 def results_interpretation():
     if request.method == "POST":
+
+        # ajax data: clicked category button.
+        # one of: 'obsteric_category' | 'surgery_category' | 'covid_category'.
         if category := [c for c in request.form if "clicked_category_button" in c]:
-            cat = json.loads(category[0])
+            cat: dict = json.loads(category[0])
             session["clicked_category_button"] = cat["clicked_category_button"]
-        results_interpretation_process_data = json.loads(show_results(request.form))
-        res = results_interpretation_process_data["result"]
-        results = json.loads(res)
-        if results.get("error"):
-            flash(results, category="error")
+            return render_template("menu/results_interpretation.html")
+
+        # flash message: interpretation of result or error.
+        row_data = json.loads(show_results(request.form))
+        interpretation_of_result_data = row_data["_result"]
+        result = json.loads(interpretation_of_result_data)
+        if result.get("error"):
+            flash(result, category="error")
         else:
-            flash(results, category="success")
+            flash(result, category="success")
+
     return render_template("menu/results_interpretation.html")
 
 
