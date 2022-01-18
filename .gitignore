@@ -1,46 +1,32 @@
-*
-# white list
+# White list.
 
-# CI
+*
+
+# CI.
 !.github/
 !.github/workflows/
 !.github/workflows/main.yaml
 
-
-# configs
-!.editorconfig
-!.envrc.sample
-!.gitattributes
-!.gitignore
-!.jshintrc
-!.python-version
-!.python-minimal-version
-!conftest.py
-!Makefile
-!poetry.lock
-!Procfile
-!pyproject.toml
-!README.md
-!requirements.txt
-
-# App
-!app.py
+# Rotem.
 !app/
-!app/__init__.py
-!app/breadcrumbs.py
-!app/custom_types.py
-!app/menu.
-!app/results_mapper.py
 
-# API news
+# 'interpretation-of-the-result' package.
+!app/interpretation/
+!app/interpretation/__init__.py
+!app/interpretation/enums.py
+!app/interpretation/errors.py
+!app/interpretation/mappers.py
+!app/interpretation/setter.py
+
+# 'news' package.
 !app/news/
 !app/news/__init__.py
 
-# App settings
+# App configs.
 !app/settings/
 !app/settings/base.py
 
-# static css
+# static css.
 !app/static
 !app/static/css
 !app/static/css/errors.css
@@ -50,7 +36,7 @@
 !app/static/css/news.css
 !app/static/css/styles.css
 !app/static/css/tables.css
-# static imgages
+# static imgages.
 !app/static/images/
 !app/static/images/bg-bottom.png
 !app/static/images/bg-top.png
@@ -69,25 +55,25 @@
 !app/static/images/rotem_tests_diff_heptem.jpg
 !app/static/images/rotem_tests_top.png
 !app/static/images/werfen.png
-#static js
+# static js.
 !app/static/js
 !app/static/js/script.js
 
-# Templates
+# Templates.
 !app/templates/
-
+# Templates erros.
 !app/templates/errors/
 !app/templates/errors/400.html
 !app/templates/errors/404.html
 !app/templates/errors/500.html
 !app/templates/errors/base_errors.html
-
+# Templates includes.
 !app/templates/includes/
 !app/templates/includes/breadcrumbs.html
 !app/templates/includes/footer.html
 !app/templates/includes/header.html
 !app/templates/includes/menu.html
-
+# Templates menu.
 !app/templates/menu/
 !app/templates/menu/_base.html
 !app/templates/menu/about.html
@@ -97,7 +83,7 @@
 !app/templates/menu/tests.html
 !app/templates/menu/useful_links.html
 !app/templates/menu/video_instructions.html
-
+# Templates base.
 !app/templates/base.html
 !app/templates/index.html
 
@@ -110,5 +96,28 @@
 # Tests
 !tests/
 !tests/test_errors.py
-!tests/test_results_mapper.py
+!tests/test_surgery_functional.py
 !tests/test_views.py
+
+!app/__init__.py
+!app/breadcrumbs.py
+!app/custom_types.py
+!app/menu.py
+!app/results_mapper.py
+
+# Configs and '__main__' (app.py).
+!.editorconfig
+!.envrc.sample
+!.gitattributes
+!.gitignore
+!.jshintrc
+!.python-minimal-version
+!.python-version
+!app.py
+!conftest.py
+!Makefile
+!poetry.lock
+!Procfile
+!pyproject.toml
+!README.md
+!requirements.txt
