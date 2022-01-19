@@ -34,6 +34,7 @@
 !app/static/css/forms.css
 !app/static/css/layout.css
 !app/static/css/menu.css
+!app/static/css/modal.css
 !app/static/css/news.css
 !app/static/css/styles.css
 !app/static/css/tables.css
@@ -58,6 +59,7 @@
 !app/static/images/werfen.png
 # static js.
 !app/static/js
+!app/static/js/modal.js
 !app/static/js/script.js
 
 # Templates.

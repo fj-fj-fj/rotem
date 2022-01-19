@@ -1,5 +1,10 @@
 {% extends 'menu/_base.html' %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+{% endblock %}
+
 {% block content %}
 {{ super() }}
 <div class="menu__page__content">
@@ -11,23 +16,24 @@
             <div>
                 <strong>Базовые тесты ROTEM</strong>
                 <ul>
-                    <li>INTEM</li>
-                    <li>EXTEM</li>
+                    <li><button class="modal__intem">?</button> INTEM</li>
+                    <li><button class="modal__extem">?</button> EXTEM</li>
                 </ul>
             </div>
             <div>
                 <strong>Дифференцирующие тесты ROTEM</strong>
                 <ul>
-                    <li>FIBTEM</li>
-                    <li>HEPTEM</li>
-                    <li>APTEM</li>
+                    <li><button class="modal__fibtem">?</button> FIBTEM</li>
+                    <li><button class="modal__heptem">?</button> HEPTEM</li>
+                    <li><button class="modal__aptem">?</button> APTEM</li>
                 </ul>
             </div>
         </div>
         <div class="menu__tests__top-wrapper">
             <div class="menu__tests__top-title">
-                <div>Внутренний путь</div>
-                <div>Внешний путь</div>
+                <h6>Внутренний<br>путь</h6>
+                <span> </span>
+                <h6>Внешний<br>путь</h6>
             </div>
             <img src="{{ url_for('static', filename='images/rotem_tests_top.png') }}" alt>
         </div>
@@ -444,4 +450,9 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}

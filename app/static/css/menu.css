@@ -161,6 +161,12 @@
   justify-content: space-around;
 }
 
+.menu__tests__top-wrapper button {
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
 .menu__tests__top-wrapper ul li {
   margin: 0.3em;
   padding: 0.2em;
@@ -168,23 +174,43 @@
 }
 
 .menu__tests__top-wrapper:first-child div:first-child ul li:first-child {
-  background-color: #80B7DE;
+  background-color: #0055BE;
+}
+
+.menu__tests__top-wrapper:first-child div:first-child ul li:first-child button {
+  color: #0055BE;
 }
 
 .menu__tests__top-wrapper:first-child div:first-child ul li:last-child {
-  background-color: #FFABA9;
+  background-color: #DF2633;
+}
+
+.menu__tests__top-wrapper:first-child div:first-child ul li:last-child button {
+  color: #DF2633;
 }
 
 .menu__tests__top-wrapper:first-child div:last-child ul li:first-child {
-  background-color: #913612;
+  background-color: #7F2C12;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:first-child button {
+  color: #7F2C12;
 }
 
 .menu__tests__top-wrapper:first-child div:last-child ul li:nth-child(2) {
-  background-color: gray;
+  background-color: #8A949C;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:nth-child(2) button {
+  color: #8A949C;
 }
 
 .menu__tests__top-wrapper:first-child div:last-child ul li:last-child {
-  background-color: #B697D0;
+  background-color: #683274;
+}
+
+.menu__tests__top-wrapper:first-child div:last-child ul li:last-child button {
+  color: #683274;
 }
 
 .menu__tests__top-wrapper strong {
@@ -205,6 +231,10 @@
 
 .menu__tests__top-title {
   display: flex;
+}
+
+.menu__tests__top-title h6 {
+  color:rgb(102, 101, 101);
 }
 
 /* Menu Historical Data */

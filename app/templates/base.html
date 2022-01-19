@@ -2,6 +2,7 @@
 <html lang="ru">
 
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>{% block title %}Rotem{% endblock %}</title>
-
+    {% endblock %}
 </head>
 
 <body>
@@ -36,8 +37,9 @@
         {% include 'includes/footer.html' %}
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
 </body>
 
 </html>
