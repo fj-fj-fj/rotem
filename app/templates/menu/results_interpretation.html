@@ -21,6 +21,29 @@
             <input id="covid_category" name="category_button" type="submit" value="Ковид-19">
         </div>
 
+        <form action="{{ url_for('results_interpretation') }}" method="post" id="form_obsteric" class="form-contact">
+            <fieldset>
+                <legend>Введите полученные значения:</legend>
+                <p>
+                    <label for="data_extem_ct">extem ct</label>
+                    <input type="text" name="data_extem_ct" id="data_extem_ct" />
+                    <label for="data_extem_a5">extem a5</label>
+                    <input type="text" name="data_extem_a5" id="data_extem_a5" />
+                </p>
+                <p>
+                    <label for="data_intem_ct">intem ct</label>
+                    <input type="text" name="data_intem_ct" id="data_intem_ct" />
+                    <label for="data_fibtem_a5">fibtem a5</label>
+                    <input type="text" name="data_fibtem_a5" id="data_fibtem_a5" />
+                </p>
+                <p>
+                    <label for="data_heptem_ct">heptem ct</label>
+                    <input type="text" name="data_heptem_ct" id="data_heptem_ct" />
+                </p>
+                <p><input type="submit" value="Расчет" /></p>
+            </fieldset>
+        </form>
+
         <form action="{{ url_for('results_interpretation') }}" method="post" id="form_surgery" class="form-contact">
             <fieldset>
                 <legend>Введите полученные значения:</legend>

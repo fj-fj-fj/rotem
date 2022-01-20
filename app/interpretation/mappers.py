@@ -7,11 +7,12 @@ from collections.abc import Mapping
 from typing import Callable
 
 from app.interpretation.abc import CaseMapper
+from app.interpretation.enums import ObstericInterpetation as OI
 from app.interpretation.enums import SurgeryInterpetation as SI
 from app.interpretation.errors import Error
 
 
-__all__ = "json_dumps_ru", "CovidMapper", "ObstericsMapper", "SurgeryMapper"
+__all__ = "json_dumps_ru", "CovidMapper", "ObstericMapper", "SurgeryMapper"
 
 
 def json_dumps_ru(interpretation_data: Mapping, default: Callable = None) -> str:
@@ -24,20 +25,48 @@ def json_dumps_ru(interpretation_data: Mapping, default: Callable = None) -> str
     return json.dumps(interpretation_data, ensure_ascii=False, default=default)
 
 
-class ObstericsMapper(CaseMapper):
+class ObstericMapper(CaseMapper):
 
     """Class for mapping relevant interpretation for "obsterics" tests."""
 
     def __init__(self):
-        """Initialize `ObstericsMapper` with boolean lists of entered data."""
-        pass
+        """Initialize `ObstericMapper` with boolean lists of entered data."""
+        self.case_0 = []  # Error case
+        self.case_1 = []  # HEMOSTASIS_CORRECTION_IS_NOT_SHOWN case
+        self.case_2 = []  # FIBRINOGEN_DEFICIENCY case
+        self.case_3 = []  # SIGNIFICIANT_THROMBOCYTOPENIA case
+        self.case_4 = []  # FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA case
+        self.case_5 = []  # DEFICIENCY_OF_FACTORS_EXTERNALLY case
+        self.case_6 = []  # FIBRINOGEN_DEFICIENCY_POSSIBLE_AND_DEFICIENCY_OF_EXTRINSIC_PATHWAY_FACTORS case
+        self.case_7 = []  # HEPARIN_EFFECT case
+        self.case_8 = []  # DEFICIENCY_OF_FACTORS_INTERNALLY case
 
     def match_case(self):
         """Return an interpretation of the results by the correct combination
         of values.
 
         """
-        pass
+        for _case in vars(self).items():
+            match _case:
+                case "case_1", [True, True, True, True]:
+                    return json_dumps_ru(OI.HEMOSTASIS_CORRECTION_IS_NOT_SHOWN)
+                case "case_2", [True, True]:
+                    return json_dumps_ru(OI.FIBRINOGEN_DEFICIENCY)
+                case "case_3", [True, True]:
+                    return json_dumps_ru(OI.SIGNIFICIANT_THROMBOCYTOPENIA)
+                case "case_4", [True, True]:
+                    return json_dumps_ru(OI.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA)
+                case "case_5", [True, True]:
+                    return json_dumps_ru(OI.DEFICIENCY_OF_FACTORS_EXTERNALLY)
+                case "case_6", [True, True]:
+                    return json_dumps_ru(OI.FIBRINOGEN_DEFICIENCY_POSSIBLE_AND_DEFICIENCY_OF_EXTRINSIC_PATHWAY_FACTORS)
+                case "case_7", [True, True]:
+                    return json_dumps_ru(OI.HEPARIN_EFFECT)
+                case "case_8", [True, True]:
+                    return json_dumps_ru(OI.DEFICIENCY_OF_FACTORS_INTERNALLY)
+                case _:  # case_0 or other
+                    bad_data_error_message: dict = Error.message("map_error")
+        return json_dumps_ru(bad_data_error_message)
 
 
 class SurgeryMapper(CaseMapper):
@@ -46,7 +75,7 @@ class SurgeryMapper(CaseMapper):
 
     def __init__(self):
         """Initialize `SurgeryMapper` with boolean lists of entered data."""
-        self.case_0 = []  # MapError case
+        self.case_0 = []  # Error case
         self.case_1 = []  # HEMOSTASIS_CORRECTION_IS_NOT_SHOWN case
         self.case_2 = []  # DEFICIENCY_OF_FACTORS_EXTERNALLY case
         self.case_3 = []  # HEPARIN_EFFECT case
@@ -91,7 +120,7 @@ class CovidMapper(CaseMapper):
 
     def __init__(self):
         """Initialize `CovidMapper` with boolean lists of entered data."""
-        self.case_0 = []  # MapError case
+        self.case_0 = []  # Error case
         self.case_1 = []  # UnfractionatedHeparin case
         self.case_2 = []  # LowMoleuclarWeightHeparin case
 

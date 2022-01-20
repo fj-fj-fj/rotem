@@ -1,7 +1,12 @@
-"""This module contains errors, exceptions, warnings."""
+"""This module contains errors, exceptions, warnings.
+
+Classes: `Error()`.
+
+"""
 from app.interpretation.abc import BaseError
 
 
+# Error() exports to app.interetation.mappers, app.interetation.setters
 __all__ = ("Error",)
 
 

@@ -4,7 +4,13 @@ from enum import Enum
 from app.custom_types import frozendict
 
 
-__all__ = ("RotemTests", "SurgeryInterpetation")
+__all__ = (
+    "RotemTests",
+    "ObstericInterpetation",
+    "SurgeryInterpetation",
+    "LowMoleuclarWeightHeparin",
+    "UnfractionatedHeparin",
+)
 
 
 class RotemTests(str, Enum):
@@ -22,6 +28,66 @@ class RotemTests(str, Enum):
     NATEM_CT = "data_natem_ct"
     NATEM_A5 = "data_natem_a5"
     NAHERTEM_CT = "data_naheptem_ct"
+
+
+class ObstericInterpetation(dict, Enum):
+
+    """Bleeding correction tactics for obsteric tests."""
+
+    HEMOSTASIS_CORRECTION_IS_NOT_SHOWN = frozendict(
+        {
+            "title": "Коррекция гемостаза не показана",
+            "description": "При коровотечении акцент на хирургический гемостаз",
+        }
+    )
+    FIBRINOGEN_DEFICIENCY = frozendict(
+        {
+            "title": "Дефицит фибриногена",
+            "description": "Криопреципитат до достижения FIBTEM A5 16 мм (см. расчет дозы)",
+        }
+    )
+    SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
+        {
+            "title": "Значимая тромбоцитопения",
+            "description": "Тромбоцитарная масса 1 доза / 10 кг или\nТромбоконцентрат 1-2 дозы",
+        }
+    )
+    FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
+        {
+            "title": "Дефицит фибриногена и значимая тромбоцитопения",
+            "description": ("Криопреципитат до достижения FIBTEM A5 16 мм (см. расчет дозы)\n1-2 тромбоцитарной массы"),
+        }
+    )
+    DEFICIENCY_OF_FACTORS_EXTERNALLY = frozendict(
+        {
+            "title": "Дефицит факторов внешнего пути",
+            "description": (
+                "(Ауто)плазма 10-15 мл/кг или\n"
+                "Концентрат протромбинового комплекса (Протромплекс, Октаплекс)\n"
+                "CT EXTEM 81-100 сек - 7,5 МЕ/кг\n"
+                "CT EXTEM 101-120 сек - 15 МЕ/кг\n"
+                "CT EXTEM >120 сек – 22,5 МЕ/кг"
+            ),
+        }
+    )
+    FIBRINOGEN_DEFICIENCY_POSSIBLE_AND_DEFICIENCY_OF_EXTRINSIC_PATHWAY_FACTORS = frozendict(
+        {
+            "title": "Дефицит фибриногена и возможный дефицит факторов внешнего пути",
+            "description": "Криопреципитат до достижения FIBTEM A5 16 мм\nповторная оценка EXTEM и FIBTEM",
+        }
+    )
+    HEPARIN_EFFECT = frozendict(
+        {
+            "title": "Эффект гепарина",
+            "description": "Протамин 0,5 мг/кг",
+        }
+    )
+    DEFICIENCY_OF_FACTORS_INTERNALLY = frozendict(
+        {
+            "title": "Дефицит факторов внутреннего пути",
+            "description": "(Ауто)плазма 10-15 мл/кг",
+        }
+    )
 
 
 class SurgeryInterpetation(dict, Enum):
@@ -67,7 +133,7 @@ class SurgeryInterpetation(dict, Enum):
     HIPERFIBRINOLYSIS = frozendict(
         {
             "title": "Гиперфибринолиз",
-            "description": ("Транексам/ЭАКК\n" "При признаках гипофибриногенемии - криопреципитат в расчетной дозе"),
+            "description": "Транексам/ЭАКК\nПри признаках гипофибриногенемии - криопреципитат в расчетной дозе",
         }
     )
     SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
@@ -79,9 +145,7 @@ class SurgeryInterpetation(dict, Enum):
     FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA = frozendict(
         {
             "title": "Дефицит фибриногена и значимая тромбоцитопения",
-            "description": (
-                "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)\n" "Тромбоцитный концентрат"
-            ),
+            "description": ("Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)\nТромбоцитный концентрат"),
         }
     )
 

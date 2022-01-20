@@ -50,7 +50,9 @@ def results_interpretation():
 
         # flash message: interpretation of result or error.
         row_data = json.loads(show_results(request.form))
-        interpretation_of_result_data = row_data["_result"]
+        interpretation_of_result_data = row_data.get("_result")
+        if not interpretation_of_result_data:  # FIXME:
+            return render_template("menu/results_interpretation.html")
         result = json.loads(interpretation_of_result_data)
         if result.get("error"):
             flash(result, category="error")

@@ -22,7 +22,7 @@ STATUS_CODE_OK = 200
     [
         # Test "case 0" (bad_data_error).
         (
-            ImmutableMultiDict([("data_extem_ct", 1)]),
+            ImmutableMultiDict([("data_extem_ct", "1")]),
             '{"error": "bad_data_error", "title": "AAAAAAAAAAAAAAAAAA", \
 "description": "Вы ввели недостаточно данных!"}',
         ),
@@ -30,10 +30,10 @@ STATUS_CODE_OK = 200
         (
             ImmutableMultiDict(
                 [
-                    ("data_extem_ct", 40),
-                    ("data_extem_a5", 37),
-                    ("data_intem_ct", 100),
-                    ("data_fibtem_a5", 8),
+                    ("data_extem_ct", "40"),
+                    ("data_extem_a5", "37"),
+                    ("data_intem_ct", "100"),
+                    ("data_fibtem_a5", "8"),
                 ]
             ),
             '{"title": "Коррекция гемостаза не показана", \
@@ -43,8 +43,8 @@ STATUS_CODE_OK = 200
         (
             ImmutableMultiDict(
                 [
-                    ("data_extem_ct", 80),
-                    ("data_fibtem_a5", 8),
+                    ("data_extem_ct", "80"),
+                    ("data_fibtem_a5", "8"),
                 ]
             ),
             '{"title": "Дефицит факторов внешнего пути", \
@@ -58,8 +58,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_intem_ct", 240),
-                    ("data_heptem_ct", 239),
+                    ("data_intem_ct", "240"),
+                    ("data_heptem_ct", "239"),
                 ]
             ),
             '{"title": "Эффект гепарина", \
@@ -69,8 +69,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_intem_ct", 0.6),
-                    ("data_heptem_ct", 0.7),
+                    ("data_intem_ct", "0.6"),
+                    ("data_heptem_ct", "0.7"),
                 ]
             ),
             '{"title": "Эффект гепарина", \
@@ -80,8 +80,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_intem_ct", 240),
-                    ("data_heptem_ct", 240),
+                    ("data_intem_ct", "240"),
+                    ("data_heptem_ct", "240"),
                 ]
             ),
             '{"title": "Дефицит факторов внутреннего пути", \
@@ -91,8 +91,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_extem_a5", 34),
-                    ("data_fibtem_a5", 7),
+                    ("data_extem_a5", "34"),
+                    ("data_fibtem_a5", "7"),
                 ]
             ),
             '{"title": "Дефицит фибриногена", \
@@ -103,8 +103,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_extem_a5", 34),
-                    ("data_fibtem_a5", 8),
+                    ("data_extem_a5", "34"),
+                    ("data_fibtem_a5", "8"),
                 ]
             ),
             '{"title": "Значимая тромбоцитопения", \
@@ -114,8 +114,8 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
         (
             ImmutableMultiDict(
                 [
-                    ("data_extem_a5", 24),
-                    ("data_fibtem_a5", 7),
+                    ("data_extem_a5", "24"),
+                    ("data_fibtem_a5", "7"),
                 ]
             ),
             '{"title": "Дефицит фибриногена и значимая тромбоцитопения", \
@@ -142,57 +142,57 @@ def test__ResulFetcher_with_surgery_category(request_form, expected):
         # Test "case 0" (bad_data_error).
         (
             {
-                "data_extem_ct": 1,
+                "data_extem_ct": "1",
             },
             REGEX_PATTERN_ERROR,
         ),
         # Test "case 1" (HEMOSTASIS_CORRECTION_IS_NOT_SHOWN).
         (
             {
-                "data_extem_ct": 40,
-                "data_extem_a5": 37,
-                "data_intem_ct": 100,
-                "data_fibtem_a5": 8,
+                "data_extem_ct": "40",
+                "data_extem_a5": "37",
+                "data_intem_ct": "100",
+                "data_fibtem_a5": "8",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 2" (DEFICIENCY_OF_FACTORS_EXTERNALLY_.
         (
             {
-                "data_extem_ct": 80,
-                "data_fibtem_a5": 8,
+                "data_extem_ct": "80",
+                "data_fibtem_a5": "8",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 3 subcase 1(range(240)" (HEPARIN_EFFECT).
         (
             {
-                "data_intem_ct": 240,
-                "data_heptem_ct": 239,
+                "data_intem_ct": "240",
+                "data_heptem_ct": "239",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 3 subcase 2(value < .8)" (HEPARIN_EFFECT).
         (
             {
-                "data_intem_ct": 0.6,
-                "data_heptem_ct": 0.7,
+                "data_intem_ct": "0.6",
+                "data_heptem_ct": "0.7",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 4" (DEFICIENCY_OF_FACTORS_INTERNALLY).
         (
             {
-                "data_intem_ct": 240,
-                "data_heptem_ct": 240,
+                "data_intem_ct": "240",
+                "data_heptem_ct": "240",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 5" (FIBRINOGEN_DEFICIENCY).
         (
             {
-                "data_extem_a5": 34,
-                "data_fibtem_a5": 7,
+                "data_extem_a5": "34",
+                "data_fibtem_a5": "7",
             },
             REGEX_PATTERN_SUCCESS,
         ),
@@ -200,16 +200,16 @@ def test__ResulFetcher_with_surgery_category(request_form, expected):
         # Test "case 7" (SIGNIFICIANT_THROMBOCYTOPENIA).
         (
             {
-                "data_extem_a5": 34,
-                "data_fibtem_a5": 8,
+                "data_extem_a5": "34",
+                "data_fibtem_a5": "8",
             },
             REGEX_PATTERN_SUCCESS,
         ),
         # Test "case 8" (FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA).
         (
             {
-                "data_extem_a5": 24,
-                "data_fibtem_a5": 7,
+                "data_extem_a5": "24",
+                "data_fibtem_a5": "7",
             },
             REGEX_PATTERN_SUCCESS,
         ),
