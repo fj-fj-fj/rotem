@@ -1,6 +1,12 @@
 {% extends 'menu/_base.html' %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
 {% block content %}
+{{ super() }}
 <div class="menu__page__content">
 
     <h1>Интерпретация результатов</h1>
@@ -95,4 +101,9 @@
 
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
 {% endblock %}

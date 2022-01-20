@@ -1,5 +1,7 @@
 // Script contains `createModal()` to create and return modal window,
-// `viewModal()` to show popup window with Rotem-test-options.
+// `viewModal()` to show popup with Rotem-test-options.
+
+'use strict';
 
 
 /* #region CreateModal */
@@ -7,11 +9,16 @@
 /**
  * Create modal object.
  * 
- * @param {string} options - options for popup window
+ * @param {string} options - options for popup
+ * @param {boolean} options.closable - show close-button or not
+ * @param {boolean} options.showFooter - show footer or not
+ * @param {string} options.title - Rotem test title
+ * @param {string} options.content - Rotem test description
+ * @param {string} options.color - Rotem test color
  * @returns modal-window object with open(), close() and setContent() actions
 */
 const createModal = function(options) {
-    /** Create and return popup window (HTMLDivElement). */
+    /** Create and return popup (HTMLDivElement). */
     function _createModalElement(options) {
         const DEFAULT_TITLE = '';
         const DEFAULT_CONTENT = '';
@@ -45,10 +52,11 @@ const createModal = function(options) {
     }
 
     const ANIMATION_SPED = 200;
+    /** @type {HTMLDivElement} */
     const modalElement = _createModalElement(options);
     let closing = false;
-
-    // Object with open(), close() and setContent()
+    
+    // open(), close() and setContent(html) for popup
     const modal = {
         open() {
             /*jshint expr:true*/
@@ -69,15 +77,16 @@ const createModal = function(options) {
             modalElement.querySelector('[data-content]').innerHTML = html;
         }
     };
-
-    // Close window if clicked 'X' or background
+    
+    // Close modal window if clicked 'X' or background or pressed Escape
     const closeModal = event => {
-        console.log('clicked', event.target.dataset.close);
-        if (event.target.dataset.close) {
+        const isEscape = (event.key === "Escape" || event.key === "Esc" || event.keyCode === 27 );
+        if (event.target.dataset.close || isEscape ) {
             modal.close();
         }
     };
     modalElement.addEventListener('click', closeModal);
+    document.addEventListener('keydown', closeModal);
 
     return modal;
 };
@@ -87,26 +96,31 @@ const createModal = function(options) {
 
 /* #region ViewModal */
 
-
 /**
- * Show popup window with Rotem-test-options.
+ * Show popup with Rotem-test-options.
  * 
- * @param {boolean} closable - show close-button or not
- * @param {boolean} showFooter - show footer or not
+ * @param {boolean} [closable=true] - show close-button or not
+ * @param {boolean} [showFooter=true] - show footer or not
  */
 const viewModal = function(closable = true, showFooter = false) {
     function _showModalByClickedButton() {
+        // Rotem tests colors
+        const INTEM_COLOR = '#0055BE';
+        const EXTEM_COLOR = '#DF2633';
+        const HEPTEM_COLOR = '#8A949C';
+        const FIBTEM_COLOR = '#7F2C12';
+        const APTEM_COLOR = '#683274';
+        // IF clicked intem:
         document.querySelector('.modal__intem').addEventListener('click', () => {
-            const COLOR = '#0055BE';
             const testIntem = {
                 closable: closable,
                 showFooter: showFooter,
-                title: `<span style='color:${COLOR};'>INTEM</span>`,
-                content: `При проведении <span style='color:${COLOR};'>INTEM</span>-теста \
+                title: `<span style='color:${INTEM_COLOR};'>INTEM</span>`,
+                content: `При проведении <span style='color:${INTEM_COLOR};'>INTEM</span>-теста \
                     в качестве контактного активатора внутреннего пути коагуляции используют \
                     эллаговую кислоту. Тест чувствителен к дефициту факторов свертывания \
                     крови, формирующих внутренний путь коагуляции.<br>При помощи параметров \
-                    <span style='color:${COLOR};'>INTEM</span>-теста может быть исследован \
+                    <span style='color:${INTEM_COLOR};'>INTEM</span>-теста может быть исследован \
                     весь гемостаз через активацию, формирование, полимеризацию, устойчивость \
                     сгустков и фибринолиз, а также ингибицию каскада формирования сгустков \
                     высокими дозами антикоагулянтов, антифибринолитиков, из-за дефектов \
@@ -114,84 +128,84 @@ const viewModal = function(closable = true, showFooter = false) {
                     тромбоцитопении и нарушений функций тромбоцитов. Величины параметров, \
                     выходящие за пределы установленных контрольных диапазонов, сигнализируют \
                     о возможном неправильном протекании коагуляции.`,
-                color: COLOR
+                color: INTEM_COLOR
             };
             createModal(testIntem).open();
         });
+        // IF clicked extem;
         document.querySelector('.modal__extem').addEventListener('click', () => {
-            const COLOR = '#DF2633';
             const testExtem = {
                 closable: closable,
                 showFooter: showFooter,
-                title: `<span style='color:${COLOR};'>EXTEM</span>`,
-                content: `<span style='color:${COLOR};'>EXTEM</span> – основной тест, при \
+                title: `<span style='color:${EXTEM_COLOR};'>EXTEM</span>`,
+                content: `<span style='color:${EXTEM_COLOR};'>EXTEM</span> – основной тест, при \
                     котором для активации внешнего пути коагуляции используется \
                     рекомбинантный тканевой фактор. При определении параметров свертывания крови \
-                    с помощью <span style='color:${COLOR};'>EXTEM</span>-теста \
+                    с помощью <span style='color:${EXTEM_COLOR};'>EXTEM</span>-теста \
                     представляется информация и о первичной активации и \
                     динамике образования сгустка, позволяя выявить проявления \
-                    недостаточности факторов свертывания крови (внешнего пути). Выходящие за \
-                    пределы нормы результаты в тесте <span style='color:${COLOR};'>EXTEM</span> \
+                    недостаточности факторов свертывания крови <i>(внешнего пути)</i>. Выходящие за \
+                    пределы нормы результаты в тесте <span style='color:${EXTEM_COLOR};'>EXTEM</span> \
                     могут быть вызваны действием антикоагулянтов, таких как гирудин и \
                     других прямых ингибиторов тромбина. Оральные антикоагулянты \
-                    (кумарин) оказывают второстепенное влияние на результаты в \
+                    <i>(кумарин)</i> оказывают второстепенное влияние на результаты в \
                     сравнении с протромбиновым временем. Значительно повышенный \
                     или пониженный гематокрит может повлиять на результаты \
                     тромбоэластометрических измерений.`,
-                color: COLOR
+                color: EXTEM_COLOR
             };
             createModal(testExtem).open();
         });
+        // IF clicked heptem:
         document.querySelector('.modal__heptem').addEventListener('click', () => {
-            const COLOR = '#8A949C';
             const testHeptem = {
                 closable: closable,
                 showFooter: showFooter,
-                title: `<span style='color:${COLOR};'>HEPTEM</span>`,
-                content: `<span style='color:${COLOR};'>HEPTEM</span>-тест представляет \
-                    собой анализ <span style='color:#0055BE;'>INTEM</span>, выполняемый \
+                title: `<span style='color:${HEPTEM_COLOR};'>HEPTEM</span>`,
+                content: `<span style='color:${HEPTEM_COLOR};'>HEPTEM</span>-тест представляет \
+                    собой анализ <span style='color:${INTEM_COLOR};'>INTEM</span>, выполняемый \
                     в присутствии гепариназы, инактивирующей гепарин in vitro, в результате \
                     чего гепарин теряет свои антикоагуляционные свойства. \
                     Это позволяет выявить нарушения гемостаза даже в присутствии \
                     гепарина и определяет специфическое действие антикоагулянтов.`,
-                color: COLOR
+                color: HEPTEM_COLOR
             };
             createModal(testHeptem).open();
         });
+        // IF clicked fibtem:
         document.querySelector('.modal__fibtem').addEventListener('click', () => {
-            const COLOR = '#7F2C12';
             const testFibtem = {
                 closable: closable,
                 showFooter: showFooter,
-                title: `<span style='color:${COLOR};'>FIBTEM</span>`,
-                content: `В тесте <span style='color:${COLOR};'>INTEM</span> активность \
+                title: `<span style='color:${FIBTEM_COLOR};'>FIBTEM</span>`,
+                content: `В тесте <span style='color:${FIBTEM_COLOR};'>INTEM</span> активность \
                     тромбоцитов подавляется цитохалазином D, сильным ингибитором \
                     полимеризации актина, который разрушает актин микрофиламентов, существенную \
                     часть цитоскелет-опосредованной стягиваемости тромбоцитов. \
-                    <span style='color:${COLOR};'>INTEM</span> устраняет влияние \
+                    <span style='color:${INTEM_COLOR};'>INTEM</span> устраняет влияние \
                     тромбоцитов на тромбообразование и позволяет обнаруживать дефицит \
                     фибриногена или качественные нарушения полимеризации фибрина. Неустойчивые \
-                    сгустки фибрина в тесте <span style='color:${COLOR};'>INTEM</span> указывают \
+                    сгустки фибрина в тесте <span style='color:${INTEM_COLOR};'>INTEM</span> указывают \
                     на нехватку фибриногена или нарушения в процессе полимеризации фибрина.`,
-                color: COLOR
+                color: FIBTEM_COLOR
             };
             createModal(testFibtem).open();
         });
+        // IF clicked aptem:
         document.querySelector('.modal__aptem').addEventListener('click', () => {
-            const COLOR = '#683274';
             const testApem = {
                 closable: closable,
                 showFooter: showFooter,
-                title: `<span style='color:${COLOR};'>APTEM</span>`,
-                content: `Тест <span style='color:${COLOR};'>APTEM</span> выполняется на \
-                    основе анализа <span style='color:#DF2633;'>EXTEM</span>, в котором \
-                    фибринолиз подавляется апротинином (антагонист плазмина). \
-                    Сравнение результатов <span style='color:${COLOR};'>APTEM</span> и \
-                    <span style='color:#DF2633;'>EXTEM</span> тестов позволяет выявить \
+                title: `<span style='color:${APTEM_COLOR};'>APTEM</span>`,
+                content: `Тест <span style='color:${APTEM_COLOR};'>APTEM</span> выполняется на \
+                    основе анализа <span style='color:${EXTEM_COLOR};'>EXTEM</span>, в котором \
+                    фибринолиз подавляется апротинином <i>(антагонист плазмина)</i>. \
+                    Сравнение результатов <span style='color:${APTEM_COLOR};'>APTEM</span> и \
+                    <span style='color:${EXTEM_COLOR};'>EXTEM</span> тестов позволяет выявить \
                     гиперфибринолиз и обосновать необходимость назначения \
                     антифибринолитических средств, что практически невозможно \
                     установить классическими лабораторными тестами.`,
-                color: COLOR
+                color: APTEM_COLOR
             };
             createModal(testApem).open();
         });
@@ -201,4 +215,5 @@ const viewModal = function(closable = true, showFooter = false) {
 
 /* #endregion ViewModal */
 
+// Listen events
 viewModal();

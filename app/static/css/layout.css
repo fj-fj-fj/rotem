@@ -1,3 +1,7 @@
+@import url('menu.css');
+@import url('tables.css');
+@import url('errors.css');
+
 body {
   margin: 0;
   padding: 0;

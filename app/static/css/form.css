@@ -63,6 +63,10 @@
   background-color:#B64297;
 }
 
+.results_interpretation__categories input[type=submit]:focus {
+  background-color:#B64297;
+}
+
 /* Flash Messages */
 
 .flash {
