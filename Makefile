@@ -53,6 +53,11 @@ run: ## Flask App: $(CMD) $(APP).
 
 ##  ================  Check  ================
 
+.PHONY: warnings
+warnings: ## Find temporary fixes, prints, forgotten notes and/or possible issues with `grep`.
+	@grep --color="always" --include="*.py" --exclude-dir=".direnv" \
+	-i -r -n -w $(PROJECT_ROOT) -e 'FIXME\|issue\|problem\|nosec\|print'
+
 isort:
 	$(VENV)/bin/$@ .
 
@@ -89,6 +94,10 @@ coverage: ## Measure code with coverage.
 	@$(VENV)/bin/$@ run --source=. -m pytest .
 	@$(VENV)/bin/$@ report -m
 	@$(VENV)/bin/$@ html
+
+.PHONY: tests
+tests: ## Test with pytest, coverage and check dev artifacts.
+	make coverage warnings
 
 
 ##  ================ Commit/Push  ================
