@@ -1,4 +1,4 @@
-"""Test "interpretation-of-thi-result" functionality."""
+"""Test "interpretation-of-thi-result" functional (surgery category)."""
 import re
 
 import pytest

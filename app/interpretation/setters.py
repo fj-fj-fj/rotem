@@ -26,6 +26,8 @@ class ObstericSetter(CaseSetter):
 
     """ "Obsteric" Rotem test category values setter."""
 
+    MAXSIZE: Literal = 1000
+
     def __init__(self, row_data: ImmutableMultiDict):
         """Initialize `ObstericSetter` with an entered data.
 
@@ -67,7 +69,7 @@ class ObstericSetter(CaseSetter):
                 case RT.EXTEM_CT, value if int(value) in range(80, 140):
                     self.case_mapper.case_5.append(True)
                     self.case_mapper.case_6.append(True)
-                case RT.EXTEM_CT, value if int(value) in range(140, SurgerySetter.MAXSIZE):
+                case RT.EXTEM_CT, value if int(value) in range(140, ObstericSetter.MAXSIZE):
                     self.case_mapper.case_6.append(True)
 
                 case RT.EXTEM_A5, value if int(value) in range(25):
@@ -75,14 +77,14 @@ class ObstericSetter(CaseSetter):
                 case RT.EXTEM_A5, value if int(value) in range(25, 35):
                     self.case_mapper.case_2.append(True)
                     self.case_mapper.case_3.append(True)
-                case RT.EXTEM_A5, value if int(value) in range(35, SurgerySetter.MAXSIZE):
+                case RT.EXTEM_A5, value if int(value) in range(35, ObstericSetter.MAXSIZE):
                     self.case_mapper.case_1.append(True)
 
                 case RT.INTEM_CT, value if float(value) < 0.8:
                     self.case_mapper.case_7.append(True)
                 case RT.INTEM_CT, value if int(value) in range(100, 240):
                     self.case_mapper.case_1.append(True)
-                case RT.INTEM_CT, value if int(value) in range(240, SurgerySetter.MAXSIZE):
+                case RT.INTEM_CT, value if int(value) in range(240, ObstericSetter.MAXSIZE):
                     self.case_mapper.case_7.append(True)
                     self.case_mapper.case_8.append(True)
 
@@ -90,7 +92,7 @@ class ObstericSetter(CaseSetter):
                     self.case_mapper.case_2.append(True)
                     self.case_mapper.case_4.append(True)
                     self.case_mapper.case_6.append(True)
-                case RT.FIBTEM_A5, value if int(value) in range(12, SurgerySetter.MAXSIsssZE):
+                case RT.FIBTEM_A5, value if int(value) in range(12, ObstericSetter.MAXSIZE):
                     self.case_mapper.case_1.append(True)
                     self.case_mapper.case_3.append(True)
                     self.case_mapper.case_5.append(True)
@@ -99,7 +101,7 @@ class ObstericSetter(CaseSetter):
                     self.case_mapper.case_7.append(True)
                 case RT.HEPTEM_CT, value if not PASS_CASE and int(value) in range(240):
                     self.case_mapper.case_7.append(True)
-                case RT.HEPTEM_CT, value if not PASS_CASE and int(value) in range(240, SurgerySetter.MAXSIZE):
+                case RT.HEPTEM_CT, value if not PASS_CASE and int(value) in range(240, ObstericSetter.MAXSIZE):
                     self.case_mapper.case_8.append(True)
 
                 case _:

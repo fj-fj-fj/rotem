@@ -73,7 +73,7 @@ class ObstericInterpetation(dict, Enum):
     FIBRINOGEN_DEFICIENCY_POSSIBLE_AND_DEFICIENCY_OF_EXTRINSIC_PATHWAY_FACTORS = frozendict(
         {
             "title": "Дефицит фибриногена и возможный дефицит факторов внешнего пути",
-            "description": "Криопреципитат до достижения FIBTEM A5 16 мм\nповторная оценка EXTEM и FIBTEM",
+            "description": "Криопреципитат до достижения FIBTEM A5 16 мм,\nповторная оценка EXTEM и FIBTEM",
         }
     )
     HEPARIN_EFFECT = frozendict(
