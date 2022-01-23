@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menuButton = menu.querySelector('.menu__btn'),
         scrollUp = container.querySelector('.top'),
         breadcrumb = container.querySelector('.breadcrumb a');
-    
+
     function toggleCSSClasses(el, ...cls) {
         cls.map(cl => el.classList.toggle(cl));
     }
@@ -23,20 +23,27 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleCSSClasses(menuButton, 'menu__btn__active', 'change');
     }
 
-    menuButton.addEventListener('click', (event) => openMenu(event));
+    menuButton.addEventListener('click', event => openMenu(event));
 
-    document.addEventListener('scroll', () => {
-        if (window.pageYOffset > 100) {
-            scrollUp.classList.add('active');
-        } else {
-            scrollUp.classList.remove('active');
-        }
-    });
-
+    // Open menu with breadcrumb first element.
     if (breadcrumb.text === 'меню') {
-        breadcrumb.addEventListener('click', (event) => openMenu(event));
+        breadcrumb.addEventListener('click', event => openMenu(event));
     } else {
         breadcrumb.parentElement.innerHTML = '';
     }
 
+    // Back to top button
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > 100) {
+          scrollUp.classList.add('active');
+      } else {
+          scrollUp.classList.remove('active');
+      }
+    });
+
+    // Remove form from localStorage if /interpretation-of-results has been closed.
+    const testCategories = document.querySelector('.results_interpretation__categories');
+    if (!testCategories && localStorage.getItem('form')) {
+        localStorage.removeItem('form');
+    }
 });

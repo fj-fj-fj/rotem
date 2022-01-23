@@ -5,7 +5,7 @@
 
 /**
  * Send data to server side.
- * 
+ *
  * @param {string} category - clicked category button
  */
     function callAjax(category) {
@@ -74,7 +74,4 @@ if (testCategories) {
         localStorage.setItem('display', 'block');
         });
     });
-} else {
-    // Remove values if user closed page
-    localStorage.removeItem('form');
 }
