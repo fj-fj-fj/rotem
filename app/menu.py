@@ -1,4 +1,8 @@
-menu = [
+"""Menu as key/value pairs: name/url."""
+
+# `menu_name_url_map` exports to app.interpretation.views.routes for `common_data()`
+# `menu_name_url_map` used in app.templates.includes.menu
+menu_name_url_map = [
     {
         "name": "информация о Rotem",
         "url": "about",

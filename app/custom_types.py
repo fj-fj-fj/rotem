@@ -1,8 +1,14 @@
+"""Module contains custom data structures."""
 from collections.abc import Mapping
+
+
+# frozendict() exports to app.interpretation.enums{ObstericInterpetation,SurgeryInterpetation}
+__all__ = ("frozendict",)
 
 
 # created by Mike Graham [https://stackoverflow.com/a/2704866/13278413]
 class FrozenDict(Mapping):
+
     """A frozendict is a read-only mapping.
 
     A key cannot be added nor removed,
@@ -32,4 +38,5 @@ class FrozenDict(Mapping):
 
 
 def frozendict(*args, **kwargs) -> FrozenDict:
+    """FrozenDict factory."""
     return FrozenDict(*args, **kwargs)

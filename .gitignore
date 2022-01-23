@@ -18,6 +18,7 @@
 !app/interpretation/errors.py
 !app/interpretation/mappers.py
 !app/interpretation/setters.py
+!app/interpretation/utils.py
 
 # 'news' package.
 !app/news/

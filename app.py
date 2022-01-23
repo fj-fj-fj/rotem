@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""The the entry point into the program."""
 from app import app
 from app.settings.base import FlaskConfiguration
 

@@ -1,3 +1,4 @@
+"""Error endpoins."""
 from flask import abort
 from flask import render_template
 from flask import request
@@ -20,6 +21,7 @@ def internal_server(error):
     return render_template("errors/500.html", url=request.url), 500
 
 
+# Test internal server error
 @app.route("/__500")
 def __500():
     abort(500)

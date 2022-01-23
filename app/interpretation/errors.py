@@ -37,4 +37,4 @@ class Error(BaseError):
                 "title": title or "Функциональность пока не реализована",
                 "description": description or "",
             },
-        }.get(error, "meta_error")
+        }.get(error, {"meta_error": "Neo, are you there?"})

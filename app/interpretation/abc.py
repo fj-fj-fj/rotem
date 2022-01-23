@@ -1,5 +1,6 @@
 """Abstract classes."""
 import abc
+from typing import Literal
 
 
 class CaseMapper(abc.ABC):
@@ -7,14 +8,16 @@ class CaseMapper(abc.ABC):
     """Abstract base class for mappers."""
 
     @abc.abstractclassmethod
-    def match_case(self):
+    def match_case(self) -> None:
         """Abstract method to get an interpretation of the result
         by the correct combination of values.
 
+        Return interpretation of the result or an error if no case matches.
         """
         raise NotImplementedError()
 
     def __repr__(self) -> str:
+        """Return class name with self.__dict__."""
         return f"{self.__class__.__name__}({vars(self)!r})"
 
 
@@ -22,22 +25,33 @@ class CaseSetter(abc.ABC):
 
     """Abstract base class for setters."""
 
+    MAXSIZE: Literal[1000] = 1000
+    """The maximum possible value for input data."""
+
+    # Input data. See `CaseSetter.filter().__doc__`. __init__ attribute.
+    row_data: dict = {}
+    # ObstericMapper, SurgeryMapper or CovidMapper instance. __init__ attribute.
+    case_mapper = "CaseMapper"  # type: ignore
+    # Interpretation of the result. __init__ attribute.
+    _result = ""
+
     @abc.abstractclassmethod
-    def _set(self):
+    def _set(self) -> None:
         """Abstract method to set values to corresponding value cases."""
         raise NotImplementedError()
 
     def __repr__(self) -> str:
+        """Return class name with input data."""
         return f"{self.__class__.__name__}({self.row_data!r})"
 
     def __str__(self) -> str:
-        """Return interpretation of results."""
+        """Return interpretation of the results."""
         return self._result
 
     def filter(self) -> list[tuple[str, str]]:
         """Return fltered fields where second value is int or float.
 
-        Example data entered:
+        Input data example:
             ImmutableMultiDict([
                 ('data_extem_ct', '1')
                 ('data_extem_a5', '0.8')
@@ -56,8 +70,10 @@ class CaseSetter(abc.ABC):
 
     def handle(self) -> str:
         """Set values to corresponding value cases and return rusult."""
+        # Set values to corresponding value cases
         self._set()
-        result: dict = self.case_mapper.match_case()
+        # Return result
+        result: dict = self.case_mapper.match_case()  # type: ignore
         return str(result)
 
 
@@ -73,7 +89,7 @@ class BaseError(abc.ABC):
         Optional parameter `data` is a tuple(title, description) to pass in
         error message.
 
-        Message error example:
+        Error message example:
             "blood_error": {
                 "error": "not_emplemented_error",
                 "title": `title` or "Функциональность пока не реализована",
@@ -86,6 +102,3 @@ class BaseError(abc.ABC):
 
         """
         raise NotImplementedError()
-
-    def __repr__(self) -> str:
-        return f"{type(self).__name__}(error={self.error!r}, data={(self.data[0], self.data[1])!r})"

@@ -1,3 +1,4 @@
+"""Menu endpoins."""
 import json
 
 from flask import flash

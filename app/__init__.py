@@ -1,3 +1,4 @@
+"""Project package."""
 from flask import Flask
 
 from app.settings.base import FlaskConfiguration

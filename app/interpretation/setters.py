@@ -5,7 +5,6 @@ Classes: `ObstericSetter()`, `SurgerySetter()`, `CovidSetter()`,
 `ResultFetcher()`.
 
 """
-from typing import Literal
 from typing import NamedTuple
 
 from werkzeug.datastructures import ImmutableMultiDict
@@ -19,14 +18,13 @@ from app.interpretation.mappers import SurgeryMapper
 
 
 # ResultFetcher() exports to app.interpretation.__init__ for show_results()
-__all__ = ("ResultFetcher",)
+# _Setter exports to app.interpretation.utils for json_dumps_ru()
+__all__ = ("ResultFetcher", "_Setter")
 
 
 class ObstericSetter(CaseSetter):
 
     """ "Obsteric" Rotem test category values setter."""
-
-    MAXSIZE: Literal = 1000
 
     def __init__(self, row_data: ImmutableMultiDict):
         """Initialize `ObstericSetter` with an entered data.
@@ -47,7 +45,7 @@ class ObstericSetter(CaseSetter):
         # Run all
         self._result: str = self.handle()
 
-    def _set(self) -> str:
+    def _set(self):
         """Set values to corresponding value cases."""
         # Expected tuple where second value is int or float
         filtered: list[tuple[str, str]] = self.filter()
@@ -57,7 +55,7 @@ class ObstericSetter(CaseSetter):
         for test_value in filtered:
             match test_value:
 
-                # Too big bloat value handler
+                # Too big float value handler
                 case rt_any, value if rt_any in [
                     v for v in RT.__members__.values()
                 ] and not value.isnumeric() and float(value) > 0.8:
@@ -112,8 +110,6 @@ class SurgerySetter(CaseSetter):
 
     """ "Surgery" Rotem test category values setter."""
 
-    MAXSIZE: Literal = 1000
-
     def __init__(self, row_data: ImmutableMultiDict):
         """Initialize `SurgerySetter` with an entered data.
 
@@ -133,7 +129,7 @@ class SurgerySetter(CaseSetter):
         # Run all
         self._result: str = self.handle()
 
-    def _set(self) -> str:
+    def _set(self):
         """Set values to corresponding value cases."""
         # Expected tuple where second value is int or float
         filtered: list[tuple[str, str]] = self.filter()
@@ -143,7 +139,7 @@ class SurgerySetter(CaseSetter):
         for test_value in filtered:
             match test_value:
 
-                # Too big bloat value handler
+                # Too big float value handler
                 case rt_any, value if rt_any in [
                     v for v in RT.__members__.values()
                 ] and not value.isnumeric() and float(value) > 0.8:
@@ -215,7 +211,7 @@ class CovidSetter(CaseSetter):
         # Run all
         self._result: str = self.handle()
 
-    def _set(self) -> str:
+    def _set(self):
         """Set values to corresponding value cases."""
         # Expected tuple where second value is int or float
         filtered: list[tuple[str, str]] = self.filter()
@@ -241,7 +237,11 @@ class ResultFetcher:
     """
 
     def __new__(cls, entered_user_data: NamedTuple) -> _Setter:
-        """Return `ObstericSetter`|`SurgerySetter`|`CovidSetter` instance."""
+        """Return `ObstericSetter`|`SurgerySetter`|`CovidSetter` instance.
+
+        `entered_user_data` contains clicked-test-category-button-name
+        and input data.
+        """
         return cls._match(entered_user_data)
 
     @staticmethod
@@ -250,8 +250,8 @@ class ResultFetcher:
         # session_data(str), request.form(ImmutableMultiDict) = EnteredUserData
         category, user_data = entered_user_data
         return {
-            "obsteric_category": ObstericSetter(user_data),
-            "surgery_category": SurgerySetter(user_data),
-            "covid_category": CovidSetter(user_data),
+            "obsteric_category": ObstericSetter,
+            "surgery_category": SurgerySetter,
+            "covid_category": CovidSetter,
             "session_error": Error.message("session_error"),
-        }[category]
+        }[category](user_data)

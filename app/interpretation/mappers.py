@@ -2,27 +2,14 @@
 by a boolean maps.
 
 """
-import json
-from collections.abc import Mapping
-from typing import Callable
-
 from app.interpretation.abc import CaseMapper
 from app.interpretation.enums import ObstericInterpetation as OI
 from app.interpretation.enums import SurgeryInterpetation as SI
 from app.interpretation.errors import Error
+from app.interpretation.utils import json_dumps_ru
 
 
-__all__ = "json_dumps_ru", "CovidMapper", "ObstericMapper", "SurgeryMapper"
-
-
-def json_dumps_ru(interpretation_data: Mapping, default: Callable = None) -> str:
-    """`json.dumps with `ensure_ascii=False`.
-
-    Return value can contain non-ASCII characters if they appear in strings
-    contained in obj. Otherwise, all such characters are escaped in JSON strings.
-
-    """
-    return json.dumps(interpretation_data, ensure_ascii=False, default=default)
+__all__ = "CovidMapper", "ObstericMapper", "SurgeryMapper"
 
 
 class ObstericMapper(CaseMapper):
@@ -41,9 +28,9 @@ class ObstericMapper(CaseMapper):
         self.case_7 = []  # HEPARIN_EFFECT case
         self.case_8 = []  # DEFICIENCY_OF_FACTORS_INTERNALLY case
 
-    def match_case(self):
+    def match_case(self) -> str:
         """Return an interpretation of the results by the correct combination
-        of values.
+        of values or an error if no case matches.
 
         """
         for _case in vars(self).items():
@@ -65,8 +52,8 @@ class ObstericMapper(CaseMapper):
                 case "case_8", [True, True]:
                     return json_dumps_ru(OI.DEFICIENCY_OF_FACTORS_INTERNALLY)
                 case _:  # case_0 or other
-                    bad_data_error_message: dict = Error.message("map_error")
-        return json_dumps_ru(bad_data_error_message)
+                    BAD_DATA_ERROR_MESSAGE: dict = Error.message("map_error")
+        return json_dumps_ru(BAD_DATA_ERROR_MESSAGE)  # type: ignore
 
 
 class SurgeryMapper(CaseMapper):
@@ -87,7 +74,7 @@ class SurgeryMapper(CaseMapper):
 
     def match_case(self) -> str:
         """Return an interpretation of the result by the correct combination
-        of values.
+        of values or an error if no case matches.
 
         """
         for _case in vars(self).items():
@@ -110,8 +97,8 @@ class SurgeryMapper(CaseMapper):
                 case "case_8", [True, True]:
                     return json_dumps_ru(SI.FIBRINOGEN_DEFICIENCY_AND_SIGNIFICIANT_THROMBOCYTOPENIA)
                 case _:  # case_0 or other
-                    bad_data_error_message: dict = Error.message("map_error")
-        return json_dumps_ru(bad_data_error_message)
+                    BAD_DATA_ERROR_MESSAGE: dict = Error.message("map_error")
+        return json_dumps_ru(BAD_DATA_ERROR_MESSAGE)  # type: ignore
 
 
 class CovidMapper(CaseMapper):
@@ -126,7 +113,7 @@ class CovidMapper(CaseMapper):
 
     def match_case(self) -> str:
         """Return an interpretation of the result by the correct combination
-        of values.
+        of values or an error if no case matches.
 
         """
         for _case in vars(self).items():
