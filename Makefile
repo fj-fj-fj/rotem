@@ -77,7 +77,7 @@ flake8: ## Check styles with flake8.
 
 .PHONY: styles
 styles: ## Check styles with flake8 and black.
-	make flake8 black
+	make black flake8
 
 mypy: ## Check types with mypy.
 	$(VENV)/bin/$@ .

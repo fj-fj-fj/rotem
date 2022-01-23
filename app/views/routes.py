@@ -34,6 +34,6 @@ def health():
     (see the HEALTHCHECK instruction in ./Dockerfile).
 
     """
-	# Handle here any business logic for ensuring you're application
+    # Handle here any business logic for ensuring you're application
     # is healthy (DB connections, etc...)
     return "Healthy: OK"
