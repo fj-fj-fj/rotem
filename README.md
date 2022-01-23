@@ -1,11 +1,11 @@
 # Rotem
 
-> Сайт про технологию Rotem и агрегатор новостей о медицине.
+> Интерпретация значений анализатора Rotem[^1] и агрегатор новостей о медицине.
 
 #
 ### Главная страница
  - новости
-### Меню 
+### Меню
  - информация о rotem
  - rotem тесты
  - исторические данные
@@ -34,9 +34,9 @@ poetry install
 # Если с Poetry что-то пошло не так:
 python3 -m venv .venv
 .venv/bin/pip install -r src/requirements.txt
+pip install -U pip && pip install -r src/requirements.txt
 
 # Управляйте переменными окружения с помощью direnv:
-pip install -U pip && pip install -r src/requirements.txt
 sudo apt-get update && sudo apt-get install direnv
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 source ~/.bashrc
@@ -45,9 +45,19 @@ direnv allow .
 # Если с direnv что-то пошло не так, установите переменные вручную из .envrc.sample
 ```
 
+## Docker
+```sh
+make dbuild
+# установите переменные из .envrc.sample
+make drun
+```
+
 ## Использование
 ```sh
 make run
 # Откройте в браузере http://127.0.0.1:5000
 ```
 ## :)
+
+#
+[^1]: [Rotational Thromboelastometry](https://en.wikipedia.org/wiki/Thromboelastometry "Thromboelastometry - Wikipedia")
