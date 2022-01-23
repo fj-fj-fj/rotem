@@ -25,3 +25,15 @@ def common_data():
 def index():
     all_articles = fetch_all_articles()["articles"]
     return render_template("index.html", articles=all_articles)
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    """Health check endpoint.
+
+    (see the HEALTHCHECK instruction in ./Dockerfile).
+
+    """
+	# Handle here any business logic for ensuring you're application
+    # is healthy (DB connections, etc...)
+    return "Healthy: OK"

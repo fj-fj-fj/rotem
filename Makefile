@@ -12,12 +12,17 @@ APP := $(ROOT_DIR)/app.py
 SERVER_APP_NAME := $(SERVER_APP_NAME)
 
 PROJECT := $(PROJECT)
+
+APP_CONTAINER := rotem-flask-application
 CI_CONTAINER := github-actions-pipeline
 
 
 .PHONY: help
 help: # Show rule and description.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+
+##  ================ Configuration  ================
 
 .PHONY: browse
 browse: ## Open root page in browser (google-chrome).
@@ -45,7 +50,8 @@ poetry-add-vendor: ## Add new Python version in _vendor (if make poetry-reinstal
 poetry-outdated: $(eval SHELL:=/bin/bash) ## Filter this to top-level dependencies only.
 	poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)
 
-##  ================  app  ================
+
+##  ================  App  ================
 
 .PHONY: run
 run: ## Flask App: $(CMD) $(APP).
@@ -139,6 +145,11 @@ rpush: ## Remote: set config vars.
 
 ##  ================  Docker  ================
 
+# https://snyk.io/advisor/docker/python/3.10
+# docker pull python:3.10-slim
+# docker images --digests | grep python
+# [...] sha256:ca2a31f21938f24bab02344bf846a90cc2bff5bd0e5a53b24b5dfcb4519ea8a3
+
 .PHONY: dserve
 dserve: ## Docker: start if not starting.
 	sudo service docker status > /dev/null || sudo service docker start
@@ -164,7 +175,33 @@ dclean: ## Docker: delete all containers and images.
 	make drm drmi
 
 
-##  ================  CI  ================
+##  ----------------  docker App  ----------------
+
+dbuild: dserve ## Build the Dockerfile and tag the image as $(APP_CONTAINER).
+	docker build --tag $(APP_CONTAINER) .
+
+drun: dserve ## Start the container with configs.
+	docker run \
+	--env FLASK_SECRET_KEY \
+	--env NEWSAPI_KEY \
+	--env TZ=$$(cat /etc/timezone) \
+	--publish 5000:5000 $(APP_CONTAINER)
+
+# fatal error: runtime: out of memory?
+# wsl --shutdown
+# df -h
+
+dup: dbuild drun ## APP: build and run.
+
+# npm install -g snyk
+dscan: ## APP: scanne containerized Python app with Snyk.
+	snyk container test $(APP_CONTAINER)
+
+dcli: ## APP: execute an interactive shell on the container.
+	docker exec -it $(APP_CONTAINER) /bin/sh
+
+
+##  ----------------  docker CI  ----------------
 
 # https://github.com/nektos/act#overview----
 act: # CI: run actions locally.

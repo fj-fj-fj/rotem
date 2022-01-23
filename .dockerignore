@@ -1,11 +1,11 @@
 # White list.
-
+# .gitignore copy without CI and config files.
 *
 
 # CI.
-!.github/
-!.github/workflows/
-!.github/workflows/main.yaml
+# !.github/
+# !.github/workflows/
+# !.github/workflows/main.yaml
 
 # Rotem.
 !app/
@@ -112,19 +112,19 @@
 !app/results_mapper.py
 
 # Configs and '__main__' (app.py).
-!/.dockerignore
-!/.editorconfig
-!/.envrc.sample
-!/.gitattributes
-!/.gitignore
-!/.jshintrc
+# !/.dockerignore
+# !/.editorconfig
+# !/.envrc.sample
+# !/.gitattributes
+# !/.gitignore
+# !/.jshintrc
 !/.python-minimal-version
-!/.python-version
+# !/.python-version
 !/app.py
-!/Dockerfile
+# !/Dockerfile
 !/Makefile
-!/poetry.lock
-!/Procfile
-!/pyproject.toml
-!/README.md
+# !/poetry.lock
+# !/Procfile
+# !/pyproject.toml
+# !/README.md
 !/requirements.txt
