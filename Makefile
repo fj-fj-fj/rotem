@@ -23,6 +23,7 @@ help: # Show rule and description.
 browse: ## Open root page in browser (google-chrome).
 	nohup google-chrome http://127.0.0.1:5000/ >> ../logs/chrome.log &
 
+.PHONY: requirements.txt
 requirements.txt: ## pip freeze > requirements.txt
 	poetry export --format requirements.txt --output $@ --without-hashes
 
@@ -107,6 +108,7 @@ tests: ## Test with pytest, coverage and check dev artifacts.
 .PHONY: push
 push: check pytest ## Pre-push hook with "interprocess communication" (make git m="message").
 	@poetry show --outdated
+	@make requirements.txt
 	@echo "Current minimal Python version: \e[1;33m$(CURRENT_MININAL_PYTHON_VERSION)\e[0m"
 	@echo "Actual Python version: \e[1;33m$$(make vermin)\e[0m"
 	@python3 -c "import os; os.system('git diff' if input('git diff [Y/n]: ') in 'Yy' else '')"
