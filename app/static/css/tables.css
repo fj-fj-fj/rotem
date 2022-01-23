@@ -4,6 +4,9 @@
   border-collapse: collapse;
   background:  #fcfbfc;
   text-align: left;
+  width: auto;
+  max-width: 95%;
+  word-break: break-word;
 }
 
 .row {

@@ -1,8 +1,7 @@
 /* Forms */
 
 .form-contact {
-  margin-top: 2em;
-  margin-bottom: 1em;
+  margin: 2em 1em 1em 1em;
   padding: 1em;
   border-radius: 4px;
   background-color: #f1dff0;
@@ -81,5 +80,5 @@
 
 .flash.error {
   border: 1px solid #ff4343;
-  background: #ff9c9c; 
+  background: #ff9c9c;
 }
