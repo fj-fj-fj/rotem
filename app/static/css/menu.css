@@ -13,7 +13,12 @@
   justify-content: center;
   transition: 0.5s;
   transform: translateX(-100%);
-  background-image: linear-gradient(125deg, #9E147A, #b8c994), url(../images/rotem_delta.jpg);
+  background-image: linear-gradient(
+    125deg,
+    rgba(158, 20, 122, .96),
+    rgba(184, 201, 148, .96)
+  ), url(../images/health_medicine_background_menu.jpg);
+  background-size: cover;
 }
 
 .menu__active {

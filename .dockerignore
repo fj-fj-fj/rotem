@@ -42,6 +42,8 @@
 !app/static/images/
 !app/static/images/bg-bottom.png
 !app/static/images/bg-top.png
+!app/static/images/health_medicine_background_menu.jpg
+!app/static/images/health_medicine_background_news.jpg
 !app/static/images/historical_data__parametry_analizov_rotem_1.jpg
 !app/static/images/historical_data__parametry_analizov_rotem_2.jpg
 !app/static/images/historical_data__printsip_tehnologii_rotem_delta.jpg

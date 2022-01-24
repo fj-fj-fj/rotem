@@ -91,8 +91,12 @@ vermin: ## Check minimal required Python versions.
 	@../../../.VENV_COMMON/bin/$@ -q . | head -1 | awk -F": " '{ print $$2 }'
 
 
-##  ================ Testing  ================
+.PHONY: compare-ignore-files
+compare-ignore-files: ## Compare .*ignore files line by line.
+	@grep -Fxvf .dockerignore .gitignore | { grep -v '!/\|.github' || test $$? = 1; }
 
+
+##  ================ Testing  ================
 
 pytest: ## Test app with pytest.
 	$(VENV)/bin/$@ .
