@@ -56,29 +56,24 @@ header {
 
 header div {
   text-align: left;
-  padding-left: 50px;
+  font-size: 3em;
+}
+
+header div p {
+  font-family: 'Rubik One', sans-serif;
+  font-size: 1em;
+  text-transform: uppercase;
   color: #293133;
-  font-size: 30px;
-}
-
-header ul {
-  margin: 0;
-  list-style: none;
-  padding-right: 50px;
-}
-
-header ul li {
-  display: inline;
+  background: linear-gradient(45deg, #0B2349 33%, #b64297 66%, #d19ac2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 header a {
-  font-size: 30px;
-  color: #293133;
-  text-decoration: none;
+    text-decoration: none;
 }
 
 header a:hover {
-  font-size: 31px;
   color: #9E147A;
 }
 
@@ -122,11 +117,16 @@ footer {
   width:100%;
   margin-top: auto;
   padding: 15px;
-  text-align: center;
   background: aliceblue;
   background-image: url(../images/bg-bottom.png);
   background-repeat: repeat-x;
   background-position: bottom center;
+}
+
+footer p {
+  color: gray;
+  padding-right: 2em;
+  text-align: right;
 }
 
 .top {
