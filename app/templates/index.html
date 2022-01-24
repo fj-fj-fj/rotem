@@ -11,7 +11,7 @@
     <article class="news">
     {% for article in articles %}
         <section class="news__item">
-            <h2 class="news__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <a href="{{ article.url }}"><h2 class="news__title">{{ article.title }}</h2></a>
             <a href="{{ article.url }}"><img src="{{ article.urlToImage }}" alt></a>
             <p class="news__lead">{{ article.description }}</p>
         </section>
