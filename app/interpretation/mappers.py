@@ -89,9 +89,6 @@ class SurgeryMapper(CaseMapper):
                     return json_dumps_ru(SI.DEFICIENCY_OF_FACTORS_INTERNALLY)
                 case "case_5", [True, True]:
                     return json_dumps_ru(SI.FIBRINOGEN_DEFICIENCY)
-                # FIXME: Об этом случае нам нужно поговорить
-                # case "case_6", [True, True, True, True]:
-                #     return json_dumps_ru(SI.HIPERFIBRINOLYSIS)
                 case "case_7", [True, True]:
                     return json_dumps_ru(SI.SIGNIFICIANT_THROMBOCYTOPENIA)
                 case "case_8", [True, True]:

@@ -62,8 +62,8 @@ run: ## Flask App: $(CMD) $(APP).
 
 .PHONY: warnings
 warnings: ## Find temporary fixes, prints, forgotten notes and/or possible issues with `grep`.
-	@grep --color="always" --include="*.py" --exclude-dir=".direnv" \
-	-i -r -n -w $(PROJECT_ROOT) -e 'FIXME\|issue\|problem\|nosec\|print'
+	@grep --color="always" --include=\*.{py,js} --exclude-dir=".direnv" \
+	-i -r -n -w $(PROJECT_ROOT) -e 'FIXME\|issue\|problem\|nosec\|print\|console.log' || test $$? = 1;
 
 isort:
 	$(VENV)/bin/$@ .

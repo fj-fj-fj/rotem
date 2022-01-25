@@ -98,8 +98,6 @@ CT EXTEM >120 сек – 22,5 МЕ/кг"}',
             '{"title": "Дефицит фибриногена", \
 "description": "Криопреципитат до достижения FIBTEM A5 10 мм (см. расчет дозы)"}',
         ),
-        # FIXME: writeme: Test "case 6" (HIPERFIBRINOLYSIS).
-        # Test "case 7" (SIGNIFICIANT_THROMBOCYTOPENIA).
         (
             ImmutableMultiDict(
                 [
@@ -196,8 +194,6 @@ def test__ResulFetcher_with_surgery_category(request_form, expected):
             },
             REGEX_PATTERN_SUCCESS,
         ),
-        # FIXME: writeme: Test "case 6" (HIPERFIBRINOLYSIS).
-        # Test "case 7" (SIGNIFICIANT_THROMBOCYTOPENIA).
         (
             {
                 "data_extem_a5": "34",
