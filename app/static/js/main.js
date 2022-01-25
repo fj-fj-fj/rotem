@@ -41,7 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Remove form from localStorage if /interpretation-of-results has been closed.
+
+    /**
+     * Clear /interpretation-of-results artefacts.
+     * See alse {@linkcode _displayFocusFreezeForm}
+     * See page {@link ../../templates/result_interpretation.html}
+     * @type {Element}
+     */
     const testCategories = document.querySelector('.results_interpretation__categories');
     if (!testCategories && localStorage.getItem('form')) {
         localStorage.removeItem('form');
