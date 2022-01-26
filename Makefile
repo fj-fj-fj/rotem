@@ -1,18 +1,24 @@
+# You can just use `make help` to read all rules.
+# tl;dr: `make pytest run` to run tests and start Flask server.
+
+# Python constants
 VENV := $(VENV)
 PIP := $(VENV)/bin/pip
-CMD := poetry run
 PYTHON := $(VENV)/bin/python3
 PYTHON_VERSION := $(PYTHON_VERSION)
 CURRENT_MININAL_PYTHON_VERSION := $(PYTHON_MINIMAL_VERSION)
 
+# files/dirs
 ENV_FILE := .envrc
-ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+PROJECT_ROOT:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-APP := $(ROOT_DIR)/app.py
+# __main__
+APP := $(PROJECT_ROOT)/app.py
+
+# Remote app name
 SERVER_APP_NAME := $(SERVER_APP_NAME)
 
-PROJECT := $(PROJECT)
-
+# Docker containers
 APP_CONTAINER := rotem-flask-application
 CI_CONTAINER := github-actions-pipeline
 
@@ -21,12 +27,16 @@ CI_CONTAINER := github-actions-pipeline
 help: # Show rule and description.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+.PHONY: run
+run: ## Start local server.
+	poetry run $(APP)
+# Clear Google Chrome Redirect Cache for a single URL
+# chrome / cntl+shift+j / network / fetch('http://127.0.0.1:5000', {method: 'post'}).then(()=>{})
+# * or any other wesite with a non-restrictive CORS policy.
 
-##  ================ Configuration  ================
+##  ================ Requirements  ================
 
-.PHONY: browse
-browse: ## Open root page in browser (google-chrome).
-	nohup google-chrome http://127.0.0.1:5000/ >> ../logs/chrome.log &
+# https://python-poetry.org/docs/cli/
 
 .PHONY: requirements.txt
 requirements.txt: ## pip freeze > requirements.txt
@@ -51,36 +61,34 @@ poetry-outdated: $(eval SHELL:=/bin/bash) ## Filter this to top-level dependenci
 	poetry show --outdated | grep --file=<(poetry show --tree | grep '^\w' | cut -d' ' -f1)
 
 
-##  ================  App  ================
-
-.PHONY: run
-run: ## Flask App: $(CMD) $(APP).
-	$(CMD) $(APP)
-
-
 ##  ================  Check  ================
+# isort, black, flake8, mypy, vermin, grep
 
 .PHONY: warnings
 warnings: ## Find temporary fixes, prints, forgotten notes and/or possible issues with `grep`.
 	@grep --color="always" --include=\*.{py,js} --exclude-dir=".direnv" \
 	-i -r -n -w $(PROJECT_ROOT) -e 'FIXME\|issue\|problem\|nosec\|print\|console.log' || test $$? = 1;
 
-isort:
-	$(VENV)/bin/$@ .
+# https://pycqa.github.io/isort/docs/configuration/options.html
+isort: ## Sort imports with isort.
+	@$(VENV)/bin/$@ .
 
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html
 black: ## Check styles with black.
-	$(VENV)/bin/$@ .
+	@$(VENV)/bin/$@ .
 
+# https://flake8.pycqa.org/en/latest/user/options.html
 flake8: ## Check styles with flake8.
-	$(VENV)/bin/$@ . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics \
+	@$(VENV)/bin/$@ . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics \
 	--exclude .git,.direnv,mypy_cashe,.pytest_cache,__pycache__,bin/,tests
 
 .PHONY: styles
 styles: ## Check styles with flake8 and black.
 	make black flake8
 
+# https://mypy.readthedocs.io/en/stable/command_line.html
 mypy: ## Check types with mypy.
-	$(VENV)/bin/$@ .
+	@$(VENV)/bin/$@ .
 
 .PHONY: check
 check: ## Check styles and types.
@@ -90,17 +98,34 @@ check: ## Check styles and types.
 vermin: ## Check minimal required Python versions.
 	@../../../.VENV_COMMON/bin/$@ -q . | head -1 | awk -F": " '{ print $$2 }'
 
-
-.PHONY: compare-ignore-files
-compare-ignore-files: ## Compare .*ignore files line by line.
+.PHONY: diff-includefiles
+diff-includefiles: ## Compare .*ignore files line by line.
 	@grep -Fxvf .dockerignore .gitignore | { grep -v '!/\|.github' || test $$? = 1; }
 
 
-##  ================ Testing  ================
+##  ================ Security  ================
+# Bandit, Safety
+# https://python-security.readthedocs.io/
 
+# https://bandit.readthedocs.io/en/latest/config.html
+bandit: ## Find common security issues in Python code with Bandit.
+	@$(VENV)/bin/$@ --recursive app.py ./app
+
+# https://pypi.org/project/safety/
+safety: ## Check installed dependencies for known vulnerabilities with Safety.
+	@poetry export --without-hashes -f requirements.txt | $(VENV)/bin/$@ check --full-report --stdin
+
+.PHONY: security
+security: bandit safety ## Guard with Bandit and Safety.
+
+##  ================ Test  ================
+# pytest, coverage
+
+# https://docs.pytest.org/en/latest/reference/customize.html#command-line-options-and-configuration-file-settings
 pytest: ## Test app with pytest.
-	$(VENV)/bin/$@ .
+	@$(VENV)/bin/$@ .
 
+# https://coverage.readthedocs.io/en/coverage-3.5.3/cmd.html
 coverage: ## Measure code with coverage.
 	@$(VENV)/bin/$@ run --source=. -m pytest .
 	@$(VENV)/bin/$@ report -m
@@ -112,15 +137,17 @@ tests: ## Test with pytest, coverage and check dev artifacts.
 
 
 ##  ================ Commit/Push  ================
-
+# `git push`, `heroku config:push`
 
 # cntl+c to break at any monent.
 .PHONY: push
-push: check pytest ## Pre-push hook with "interprocess communication" (make git m="message").
+push: check tests ## Pre-push hook with "interprocess communication" (make git m="message").
 	@poetry show --outdated
 	@make requirements.txt
 	@echo "Current minimal Python version: \e[1;33m$(CURRENT_MININAL_PYTHON_VERSION)\e[0m"
 	@echo "Actual Python version: \e[1;33m$$(make vermin)\e[0m"
+	@make warnings diff-includefiles security
+	@python3 -c "import os; os.system(input())"
 	@python3 -c "import os; os.system('git diff' if input('git diff [Y/n]: ') in 'Yy' else '')"
 	@git add -p . && git status
 	@python3 -c "import os; os.system(input())"
@@ -129,25 +156,25 @@ push: check pytest ## Pre-push hook with "interprocess communication" (make git 
 	@python3 -c "import os; os.system('git push -u origin main' if input('git push [Y/n]: ') in 'Yy' else '')"
 	@python3 -c "import os; os.system('git push heroku' if input ('git push heroku [Y/n]: ') in 'Yy' else '')"
 
+
 # https://devcenter.heroku.com/articles/heroku-cli
-# install heroku-cli:
-#   curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-#   heroku --version
-#   heroku login or heroku login -i
-#   heroku git:remote -a $(SERVER_APP_NAME)
-# Poetry build pack for Heroku:
-#   heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git -a $(SERVER_APP_NAME)
-#   heroku buildpacks:clear -a $(SERVER_APP_NAME)
-#   heroku buildpacks:add heroku/python -a $(SERVER_APP_NAME)
+# curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+# heroku --version
+# heroku login (or heroku login -i)
+# heroku git:remote -a $(SERVER_APP_NAME)
+# heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git -a $(SERVER_APP_NAME)
+# heroku buildpacks:clear -a $(SERVER_APP_NAME)
+# heroku buildpacks:add heroku/python -a $(SERVER_APP_NAME)
 # https://devcenter.heroku.com/articles/config-vars
 # https://github.com/xavdid/heroku-config:
-#   heroku plugins:install heroku-config
-.PHONY: rpush
-rpush: ## Remote: set config vars.
+# heroku plugins:install heroku-config
+.PHONY: rset
+rset: ## Remote: set config vars.
 	heroku config:push --file $(ENV_FILE) --app $(SERVER_APP_NAME)
 
 
 ##  ================  Docker  ================
+# dev, ci
 
 # https://snyk.io/advisor/docker/python/3.10
 # docker pull python:3.10-slim
@@ -179,7 +206,7 @@ dclean: ## Docker: delete all containers and images.
 	make drm drmi
 
 
-##  ----------------  docker App  ----------------
+##  ----------------  docker dev  ----------------
 
 dbuild: dserve ## Build the Dockerfile and tag the image as $(APP_CONTAINER).
 	docker build --tag $(APP_CONTAINER) .
@@ -222,7 +249,6 @@ cirun: ## CI: run the container.
 	docker run \
 		-d --rm \
 		--volume /var/run/docker.sock:/var/run/docker.sock \
-		--volume $(PROJECT):/project \
 		--volume $(pwd)/.github/ci-logs:/logs \
 		--volume /home/vdim/.pyenv/versions/$(PYTHON_VERSION)/:/opt/hostedtoolcache/Python/$(PYTHON_VERSION)/x64/ \
 		--name "$(CI_CONTAINER)" $(CI_CONTAINER)
@@ -240,7 +266,7 @@ cicli: ## CI: execute an interactive shell on the container.
 	docker exec -it $(CI_CONTAINER) /bin/sh
 
 
-##  ================  Configuration  ================
+##  ================  make configuration  ================
 
 .DEFAULT: help
 MAKEFLAGS += --no-print-directory
